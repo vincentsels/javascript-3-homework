@@ -1,0 +1,89 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="../model-base-class.js"></script>
+  <script>
+    // completed script to study
+
+    const fish = new BasicModel("fish");
+    console.assert(fish instanceof BasicModel, "fish is not an instance of BasicModel");
+    console.assert(fish.name === "fish", "fish is not named fish");
+
+    const first_fish = {fast: true, species: "tuna", endangered: false};
+    fish.create(first_fish);
+    const first_fish_entry = fish.read(0);
+    console.assert(first_fish_entry.fast === true, "first fish isn't fast");
+    console.assert(first_fish_entry.id === 0, "first fish isn't the first fish");
+
+    first_fish.endangered = true;
+    fish.update(0, first_fish);
+    const updated_fish_entry = fish.read(0);
+    console.assert(updated_fish_entry.fast === true, "first fish is no longer fast");
+    console.assert(updated_fish_entry.endangered === true, "first fish isn't now endangered");
+
+    fish.remove(0);
+    try {
+      console.log(fish.read(0));
+    } catch(err) {
+      console.error(err);
+    }
+
+    const second_fish = {fast: false, species: "minnow", endangered: false};
+    fish.create(second_fish);
+    const second_fish_entry = fish.read(1);
+    console.assert(second_fish_entry.species === "minnow", "second fish isn't a minnow");
+    console.assert(second_fish_entry.id === 1, "second fish isn't the second fish");
+
+    fish.create({fast: false, species: "fillet", endangered: true});
+    console.log("all fish")
+    const all_fish = fish.DB; // "getter" property
+    for (let key in all_fish) {
+      console.log(all_fish[key]);
+    }
+
+    // exercises to complete
+
+    const birds = "birds";
+    console.assert(birds instanceof BasicModel, "bird is not an instance of BasicModel");
+    console.assert(birds.name === "bird", "bird is not named bird");
+
+    birds.create({color: "red", can_fly: true, species: "cardinal"});
+
+    const second_bird = {}; // fix this line
+    birds.create(second_bird);
+    const second_bird_entry = {}; // fix this line
+    console.assert(second_bird_entry.can_fly === true, "second bird can fly");
+    console.assert(second_bird_entry.id === 1, "second bird isn't the second bird (1)");
+
+    second_bird.color = null;  // fix this line
+    birds.update(1, second_bird);
+    const updated_bird_entry = {}; // fix this line
+    console.assert(updated_bird_entry.color === "orange", "second bird is no longer purple");
+    console.assert(updated_bird_entry.can_fly === true, "second bird devolved");
+    console.assert(second_bird_entry.id === 1, "second bird isn't the second bird (2)");
+
+    birds.remove(3); // fix this line
+    try {
+      console.log(birds.read(3));
+    } catch(err) {
+      console.error(err);
+    }
+
+    const third_bird = null; // fix this line
+    birds.create(third_bird);
+    const third_bird_entry = birds.read(/* the newest entry's id*/);
+    console.assert(third_bird_entry.species === "pigeon", "third bird isn't a pigeon");
+    // fix the next assert
+    console.assert(third_bird_entry.id === null, "third bird isn't the third bird");
+
+    // log all entries in the birds model
+    console.log("all birds")
+  </script>
+</head>
+
+<body>
+</body>
+</html>
