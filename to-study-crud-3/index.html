@@ -1,0 +1,98 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="../model-base-class.js"></script>
+  <script src="data.js"></script>
+
+</head>
+
+<body>
+
+  <p>
+    this challenge example includes
+    <ul>
+      <li>dom components</li>
+      <li>error handling</li>
+      <li>1 to many data relationship</li>
+    </ul>
+    inspect this page's sources for the full learning experience
+  </p>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>Things</h2>
+
+  <script src="thing-scripts/component-thing-error.js"></script>
+  <script src="thing-scripts/component-all-things.js"></script>
+
+  <div>
+    <button id="view-things">view all things</button>
+  </div>
+  <div>
+    <input id="new-thing" value="type new thing here"></input>
+    <button id="create-thing">create thing</button>
+  </div>
+  <div>
+    <input id="thing-to-delete" value="enter the id to delete"></input>
+    <button id="delete-thing">delete thing</button>
+  </div>
+  <div>
+    id: <input id="thing-to-update" value="enter the id to update"></input>
+    value: <input id="new-value" value="enter the new value"></input>
+    <button id="update-thing">update thing</button>
+  </div>
+
+  <div id="things-div"></div>
+
+  <script src="thing-scripts/handler-view-all.js"></script>
+  <script src="thing-scripts/handler-create.js"></script>
+  <script src="thing-scripts/handler-delete.js"></script>
+  <script src="thing-scripts/handler-update.js"></script>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>Categories</h2>
+  
+  <script src="category-scripts/component-all-categories.js"></script>
+  <script src="category-scripts/component-category-error.js"></script>
+  <script src="category-scripts/component-one-category.js"></script>
+  <script src="category-scripts/procedure-populate-category.js"></script>
+
+  <div>
+    <button id="view-categories">view all categories</button>
+  </div>
+  <div>
+    <input id="new-category" value="new category's name"></input>
+    <button id="create-category">create category</button>
+  </div>
+  <div>
+    <input id="category-to-delete" value="enter the id to delete"></input>
+    <button id="delete-category">delete category</button>
+  </div>
+  <div>
+    <input id="category-to-view" value="enter the id of a category"></input>
+    <button id="view-one-category">view one category</button>
+  </div>
+  <div>
+    thing: <input id="thing-to-add" value="enter the id of a thing"></input>
+    category: <input id="category-to-update" value="enter the id of a category"></input>
+    <button id="add-to-category">add to category</button>
+  </div>
+
+  <div id="categories-div"></div>
+
+  <script src="category-scripts/handler-view-all.js"></script>
+  <script src="category-scripts/handler-create.js"></script>
+  <script src="category-scripts/handler-delete.js"></script>
+  <script src="category-scripts/handler-view-one.js"></script>
+  <script src="category-scripts/handler-add-to.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="../../BasicModel-class.js"></script>
+  <script src="./SearchableModel-extension.js"></script>
+  <script>
+
+    // practice using it! write some scripts to pass these asserts
+    console.log("--- using your SearchableModel ---")
+    try {
+
+      ; // write this line
+      console.assert(items.name === "items", "practice 1");
+
+      ; // write this line
+      console.assert(items.read(0).title === "first", "practice 2");
+
+      ; // write this line
+      console.assert(items.read(1).title === "first", "practice 3");   
+
+      ; // write this line
+      console.assert(items.read(2).title === "fourth", "practice 4"); 
+
+
+
+      ; // use a search method!
+      let actual = JSON.stringify(one);
+      console.assert(actual === '{"title":"fourth","id":2}', "practice 5");
+
+      ; // use a different search method!
+      actual = JSON.stringify(two);
+      console.assert(actual === '[{"title":"fourth","id":2}]', "practice 6");
+
+      ; // use a different search method!
+      actual = JSON.stringify(three);
+      console.assert(actual === '[{"title":"fourth","id":2}]', "practice 7");
+
+      ; // use a different search method!
+      let actual = JSON.stringify(four);
+      console.assert(actual === '{"title":"fourth","id":2}', "practice 8");
+
+
+
+      ; // use a search method!
+      let actual = JSON.stringify(five);
+      console.assert(actual === '{"title":"first","id":0}', "practice 9a");
+      console.assert(actual !== '{"title":"first","id":1}', "practice 9b");
+
+      ; // use a different search method!
+      actual = JSON.stringify(six);
+      let expected = '[{"title":"first","id":0},{"title":"first","id":1}]';
+      console.assert(actual === expected, "practice 10");
+
+      ; // use a different search method!
+      actual = JSON.stringify(seven);
+      let expected = '[{"title":"first","id":0},{"title":"first","id":1}]';
+      console.assert(actual === expected, "practice 11");
+
+      ; // use a different search method!
+      let actual = JSON.stringify(eight);
+      console.assert(actual === '{"title":"first","id":2}', "practice 12a");
+      console.assert(actual !== '{"title":"first","id":1}', "practice 12b");
+
+
+
+      ; // use a search method
+      console.assert(nine === null, "practice 13");
+
+      ; // use a different search method!
+      console.assert(ten === null, "practice 14");
+
+      ; // use a different search method!
+      console.assert(eleven === null, "practice 15");
+
+      ; // reuse a search method!
+      console.assert(ten === null, "practice 16");
+
+      ; // reuse a different search method!
+      console.assert(eleven === null, "practice 17");
+
+
+    } catch(err) {
+      console.error(err);
+    }
+
+    // --- !! challenge !! ---
+
+    /*
+      if you're itching for more, use the query method a bit!
+      AND write your own asserts to show that they work
+    */
+
+  </script>
+</head>
+
+<body>
+</body>
+</html>

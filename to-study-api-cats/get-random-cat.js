@@ -1,3 +1,5 @@
+// notice how the third layer is written in the promise callback
+
 function get_random_cat_handler() {
   // read user input
   // no user input

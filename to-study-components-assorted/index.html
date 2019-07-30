@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="clear-div.js"></script>
+
+  <style>
+    td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>dom component examples</h2>
+
+  <hr>
+
+  <!-- header & text --> <br>
+  <div>
+    <button id="render-hp">render text</button> <br>
+    header text: <input id="header-value"></input>
+    body text: <input id="p-value"></input> 
+    <button id="change-hp">change text</button> <br>
+    <button onclick="clear_div('hp-zone')">clear</button>
+    <div id="hp-zone"></div>
+    <script src="header-and-p.js"></script>
+  </div>
+  <br> 
+  <hr>
+  <br>
+
+  <!-- ordered list from an array (radio selection or input) --> 
+  <div>
+    <button id="render-ordered-list">render ordered list</button> <br>
+    thing to add: <input id="new-ol-entry"></input> <button id="add-to-ordered-list">add to list</button> <br>
+    <button id="remove-from-ordered-list">remove last item</button> <br>
+    <button onclick="clear_div('ordered-list-zone')">clear</button>    <div id="ordered-list-zone"></div>
+    <script src="ordered-list.js"></script>
+  </div>
+  <br> 
+  <hr>
+  <br> 
+
+  <!-- unordered list from an object (radio selection or input) -->
+  <div>
+    <button id="render-unordered-list">render unordered list</button> <br>
+    new key: <input id="new-ul-key"></input> new value: <input id="new-ul-value"></input> <button id="add-to-unordered-list">add to list</button> <br>
+    key to remove: <input id="ul-key-to-remove"></input> <button id="remove-from-unordered-list">remove</button> <br>
+    <button onclick="clear_div('unordered-list-zone')">clear</button> 
+    <div id="unordered-list-zone"></div>
+    <script src="unordered-list.js"></script>
+  </div>
+  <br> 
+  <hr>
+  <br> 
+
+  <!-- table with given dimensions -->
+  <div>
+    <button id="render-table">render table</button> <br>
+    width: <input id="new-table-width"></input>
+    height: <input id="new-table-height"></input> 
+    <button id="new-table">new table</button> <br>
+    <button onclick="clear_div('table-zone')">clear</button> <br>
+    <div id="table-zone"></div>
+    <script src="table.js"></script>
+  </div>
+  <br>
+  <hr>
+  
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="../../BasicModel-class.js"></script>
+  <script src="./SearchableModel-extension.js"></script>
+  <script>
+
+
+    console.log("%cclass SearchableModel extends BasicModel", "font-weight:bold");
+
+    // write the static methods (pass these asserts)
+    { console.log("--- static methods ---");
+
+      const is_valid_1 = SearchableModel.isValidKey("");
+      console.assert(is_valid_1 === true, "isValidKey 1");
+
+      const is_invalid_1 = SearchableModel.isValidKey(NaN);
+      console.assert(is_invalid_1 === false, "isValidKey 2");
+
+      const is_invalid_2 = SearchableModel.isValidKey(true);
+      console.assert(is_invalid_2 === false, "isValidKey 3");
+
+      const is_invalid_3 = SearchableModel.isValidKey({});
+      console.assert(is_invalid_3 === false, "isValidKey 4");
+    }
+
+    // write the getter
+    { console.log("\n--- getter ---");
+
+      const testing_allEntries = new SearchableModel("allEntries test");
+      testing_allEntries.create({a: "a"});
+      testing_allEntries.create({b: "b"});
+      testing_allEntries.create({c: "c"});
+
+      let expected = '[{"a":"a","id":0},{"b":"b","id":1},{"c":"c","id":2}]';
+      let actual = JSON.stringify(testing_allEntries.allEntries);;
+      console.assert(actual === expected, "allEntries 1");
+
+      testing_allEntries.remove(2);
+      expected = '[{"a":"a","id":0},{"b":"b","id":1}]';
+      actual = JSON.stringify(testing_allEntries.allEntries);
+      console.assert(actual === expected, "allEntries 3");
+
+      testing_allEntries.update(1, {c:"c"});
+      expected = '[{"a":"a","id":0},{"c":"c","id":1}]';
+      actual = JSON.stringify(testing_allEntries.allEntries);
+      console.assert(actual === expected, "allEntries 3");
+
+      testing_allEntries.create({f:"f"});
+      expected = '[{"a":"a","id":0},{"c":"c","id":1},{"f":"f","id":3}]';
+      actual = JSON.stringify(testing_allEntries.allEntries);
+      console.assert(actual === expected, "allEntries 4");
+
+    }
+
+    // write the search methods to pass these asserts
+    console.log("\n--- search methods ---");
+    
+    const search_testing = new SearchableModel("search testing");
+    search_testing.create({a: 1, b: 1});
+    search_testing.create({a: 1, b: 1});
+
+    search_testing.create({a: 1, b: 2});
+
+    search_testing.create({a: 2, b: 1});
+
+    search_testing.create({a: 2, b: 2});
+    search_testing.create({a: 2, b: 2});
+
+    console.log("allEntries", search_testing.allEntries);
+
+    //     varifyEntry ---
+    { console.log("\n    verifyEntry ---");
+
+      const verify_1 = search_testing.verifyEntry( {id:0, a:1, b:1} );
+      console.assert(verify_1 === true, "varifyEntry 1");
+
+      const verify_2 = search_testing.verifyEntry( {id:5, a:2, b:2} );
+      console.assert(verify_2 === true, "varifyEntry 2");
+
+      const verify_3 = search_testing.verifyEntry( {id:0, a:2, b:1} );
+      console.assert(verify_3 === false, "varifyEntry 3");
+
+      const verify_4 = search_testing.verifyEntry( {id:3, a:1, b:2} );
+      console.assert(verify_4 === false, "varifyEntry 4");
+    }
+
+    //     findOneKeyValue ---
+    { console.log("\n    findOneKeyValue ---");
+      try {
+
+        const fokv_1 = search_testing.findOneKeyValue("a", 1);
+        console.assert(fokv_1.a === 1, "findOneKeyValue 1");
+
+        const fokv_2 = search_testing.findOneKeyValue("b", 1);
+        console.assert(fokv_2.b === 1, "findOneKeyValue 2");
+
+        const fokv_3 = search_testing.findOneKeyValue("b", 2);
+        console.assert(fokv_3.b === 2, "findOneKeyValue 3");
+
+        const fokv_4 = search_testing.findOneKeyValue("a", 2);
+        console.assert(fokv_4.a === 2, "findOneKeyValue 4");
+
+        const fokv_5 = search_testing.findOneKeyValue("id", 2);
+        console.assert(fokv_5 === null, "findOneKeyValue 5");
+
+        const fokv_6 = search_testing.findOneKeyValue("id", 6);
+        console.assert(fokv_6 === null, "findOneKeyValue 6");
+
+        const fokv_7 = search_testing.findOneKeyValue("a", 3);
+        console.assert(fokv_7 === null, "findOneKeyValue 7");
+
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    //     findAllKeyValue ---
+    { console.log("\n    findAllKeyValue ---");
+
+      const fakv_1 = search_testing.findAllKeyValue("a", 1);
+      let actual = JSON.stringify(fakv_1);
+      let expected = '[{"a":1,"b":1,"id":0},{"a":1,"b":1,"id":1},{"a":1,"b":2,"id":2}]';
+      console.assert(actual === expected, "findAllKeyValue 1");
+
+      const fakv_2 = search_testing.findAllKeyValue("b", 2);
+      actual = JSON.stringify(fakv_2);
+      expected = '[{"a":1,"b":2,"id":2},{"a":2,"b":2,"id":4},{"a":2,"b":2,"id":5}]';
+      console.assert(actual === expected, "findAllKeyValue 2");
+
+      const fakv_3 = search_testing.findAllKeyValue("b", 2);
+      actual = JSON.stringify(fakv_3);
+      expected = '[{"a":1,"b":2,"id":2},{"a":2,"b":2,"id":4},{"a":2,"b":2,"id":5}]';
+      console.assert(actual === expected, "findAllKeyValue 3");
+
+      const fakv_4 = search_testing.findAllKeyValue("id", 0);
+      actual = JSON.stringify(fakv_4);
+      expected = '[]';
+      console.assert(actual === expected, "findAllKeyValue 4");
+
+      const fakv_5 = search_testing.findAllKeyValue("id", 6);
+      actual = JSON.stringify(fakv_5);
+      expected = '[]';
+      console.assert(actual === expected, "findAllKeyValue 5");
+
+      const fakv_6 = search_testing.findAllKeyValue("a", 3);
+      actual = JSON.stringify(fakv_6);
+      expected = '[]';
+      console.assert(actual === expected, "findAllKeyValue 6");
+    }
+
+    //     findOneMatching ---
+    { console.log("\n    findOneMatching ---");
+
+      const fom_1 = search_testing.findOneMatching({a:1, b:2});
+      let actual = JSON.stringify(fom_1);
+      let expected = '{"a":1,"b":2,"id":2}';
+      console.assert(actual === expected, "findOneMatching 1");
+
+      const fom_2 = search_testing.findOneMatching({a:2, b:2});
+      actual = JSON.stringify(fom_2);
+      expected = '{"a":2,"b":2,"id":4}';
+      console.assert(actual === expected, "findOneMatching 2");
+
+      const fom_3 = search_testing.findOneMatching({a:1, b:1});
+      actual = JSON.stringify(fom_3);
+      expected = '{"a":1,"b":1,"id":0}';
+      console.assert(actual === expected, "findOneMatching 3");
+
+      const fom_4 = search_testing.findOneMatching({a:2, b:1});
+      actual = JSON.stringify(fom_4);
+      expected = '{"a":2,"b":1,"id":3}';
+      console.assert(actual === expected, "findOneMatching 4");
+
+      const fom_5 = search_testing.findOneMatching({a:2, b:1, id:9});
+      actual = JSON.stringify(fom_5);
+      expected = '{"a":2,"b":1,"id":3}';
+      console.assert(actual === expected, "findOneMatching 5");
+
+      const fom_6 = search_testing.findOneMatching({a:2, b:4});
+      expected = null;
+      console.assert(fom_6 === expected, "findOneMatching 6");
+
+    }
+
+    //     findAllMatching ---
+    { console.log("\n    findAllMatching ---");
+
+      const fam_1 = search_testing.findAllMatching({a:1, b:1});
+      let actual = JSON.stringify(fam_1);
+      let expected = '[{"a":1,"b":1,"id":0},{"a":1,"b":1,"id":1}]';
+      console.assert(actual === expected, "findAllMatching 1");
+
+      const fam_2 = search_testing.findAllMatching({a:1, b:2});
+      actual = JSON.stringify(fam_2);
+      expected = '[{"a":1,"b":2,"id":2}]';
+      console.assert(actual === expected, "findAllMatching 2");
+
+      const fam_3 = search_testing.findAllMatching({a:2, b:1});
+      actual = JSON.stringify(fam_3);
+      expected = '[{"a":2,"b":1,"id":3}]';
+      console.assert(actual === expected, "findAllMatching 3");
+
+      const fam_4 = search_testing.findAllMatching({a:2, b:2});
+      actual = JSON.stringify(fam_4);
+      expected = '[{"a":2,"b":2,"id":4},{"a":2,"b":2,"id":5}]';
+      console.assert(actual === expected, "findAllMatching 4");
+
+      const fam_5 = search_testing.findAllMatching({a:2, b:2, id:9});
+      actual = JSON.stringify(fam_5);
+      expected = '[{"a":2,"b":2,"id":4},{"a":2,"b":2,"id":5}]';
+      console.assert(actual === expected, "findAllMatching 5");
+
+      const fam_6 = search_testing.findAllMatching({a:2, b:4});
+      actual = JSON.stringify(fam_6);
+      expected = '[]';
+      console.assert(actual === expected, "findAllMatching 6");
+
+    }
+
+    // --- !! challenge !! ---
+
+    /*
+      if you're itching for more, write the two query methods!
+      AND write your own asserts to show that they work
+    */
+
+  </script>
+</head>
+
+<body>
+</body>
+</html>

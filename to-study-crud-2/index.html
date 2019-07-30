@@ -1,0 +1,66 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <script src="../model-base-class.js"></script>
+  <script src="data.js"></script>
+
+</head>
+
+<body>
+
+  <h1>Many New Models</h1>
+  <p>
+    inspect this page's sources for the full learning experience
+  </p>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>All Models</h2>
+
+  <div>
+    <input id="new-model-name" value="name your new model here"></input>
+    <button id="add-new-model">add new model</button>
+  </div>
+  <div>
+    <input id="name-to-delete" value="name of model to delete"></input>
+    <button id="delete-model">delete model</button>
+  </div>
+
+  <div id="all-models-div"></div>
+
+  <script src="all-models/new-model.js"></script>
+  <script src="all-models/delete-model.js"></script>
+
+  <br>
+  <hr>
+  <br>
+
+  <h2>One Model</h2>
+  
+  <div>
+    <input id="model-to-read" value="name of model to read out"></input>
+    <button id="read-model">load model</button>
+  </div>
+  <br>
+  <div>
+    <input id="new-entry" value="enter a value to add"></input>
+    <button id="add-entry">add value</button>
+  </div>
+  <div>
+    <input id="entry-to-delete" value="enter an id to delete"></input>
+    <button id="delete-entry">delete entry</button>
+  </div>
+
+  <div id="one-model-div"></div>
+
+  <script src="one-model/load.js"></script>
+  <script src="one-model/create.js"></script>
+  <script src="one-model/delete.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="state-bios-array.js"></script>
+  <script src="component-bio.js"></script>
+  <script src="component-all-bios.js"></script>
+  <!-- this handler is required up top since it is not connected to any hard-coded HTML elements -->
+  <script src="handler-render-one.js"></script>
+
+</head>
+
+<body>
+
+  <h2>a simple "app" with components and state</h2>
+
+  <!-- bio (from user input) --> <br>
+  <div>
+    github username: <input id="username"></input> <br>
+    photo url: <input id="photo-link"></input> <br>
+    <button id="render-new-bio-button">render new bio</button> <br>
+    <button id="add-bio-button">add bio to list</button> <br>
+    <button id="all-bios-button">render all bios</button> <br>
+  </div>
+
+  <br>
+  <div id="display-zone"></div>
+
+  
+  <script src="handler-render-new-bio.js"></script>
+  <script src="handler-render-all.js"></script>
+  <script src="handler-add-bio.js"></script>
+
+  
+</body>
+</html>

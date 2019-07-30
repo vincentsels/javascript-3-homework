@@ -1,0 +1,98 @@
+- init?
+  how would this work?
+  is it necessary?
+
+
+
+--- data ---
+
+// pokeobjects look like this, saved in model
+{
+  0: {
+    api_id: 218,
+    img_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/218.png", 
+    type: "fire",
+    views: 3,
+    starred: true,
+    name: "slugma",
+    id: 0
+  }
+}
+
+build a pokemon object class
+  constructor
+    takes
+      api_id
+      img_url
+      type
+      name
+    default
+      views === 0
+      starred === false
+  methods
+    view
+
+--- functions ---
+
+create_poke_entry
+  takes in the whole json from db
+  returns a new object matching the schema above
+
+sort_pokemon_by
+  takes in 
+    array of pokemon (saved or from api)
+    key to sort by
+  returns a new array with the pokemon sorted by this criteria
+
+
+
+--- components ---
+
+- develop these separately
+  write an example in finished html they have to componentize
+  provide dummy data to test them
+
+unsaved_pokemon 
+  name
+  image
+  type
+  save_button
+
+saved_pokemon
+  name
+  image
+  type
+  views
+  log_all_info button
+  remove_button
+
+profiles_list
+  takes in an array of objects and type of profile
+  returns a list of those profiles
+
+--- handlers ---
+
+/api
+  list all pokemon from api
+  sort all by key
+  read one from api
+  save pokemon from api
+
+/saved
+  list all saved pokemon
+  view one saved pokemon
+  search saved pokemon
+  sort saved pokemon
+
+
+
+
+
+
+
+
+
+
+
+
+

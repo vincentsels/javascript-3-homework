@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
 
-  <script src="../model-base-class.js"></script>
+  <script src="../BasicModel-class.js"></script>
   <script>
     // completed script to study
 
@@ -44,6 +44,8 @@
       console.log(all_fish[key]);
     }
 
+    console.log("active fish ids", fish.activeIds);
+
     // exercises to complete
 
     const birds = "birds";
@@ -78,6 +80,8 @@
     console.assert(third_bird_entry.species === "pigeon", "third bird isn't a pigeon");
     // fix the next assert
     console.assert(third_bird_entry.id === null, "third bird isn't the third bird");
+
+    console.log("active bird ids", birds.activeIds);
 
     // log all entries in the birds model
     console.log("all birds")

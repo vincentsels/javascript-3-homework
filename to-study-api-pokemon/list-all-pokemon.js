@@ -1,3 +1,5 @@
+// notice how the third layer is written in the promise callback
+
 function list_all_pokemon_handler() {
   // read user input
   // no user input

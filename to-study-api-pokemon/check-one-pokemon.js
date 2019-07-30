@@ -1,10 +1,13 @@
+// notice how the third layer is written in the promise callback
+
 function check_one_pokemon_handler() {
   // read user input
   const input_field = document.getElementById("name-of-pokemon");
   const pokemoname = input_field.value;
+  const url = "https://pokeapi.co/api/v2/pokemon/"+pokemoname;
 
   // make api request
-  fetch("https://pokeapi.co/api/v2/pokemon/"+pokemoname)
+  fetch(url)
     .then(function(response) {
       // handle HTTP response
 
