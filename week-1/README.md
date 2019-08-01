@@ -5,8 +5,8 @@
 | :egg: __[three-layer handlers](./three-layer-handlers)__ | | | | |
 | :egg: __[reference type arguments](./reference-type-args.md)__ | | | | |
 | :egg: __[the Event Loop](./loupe-exercises.md)__ | | | | |
-| :hatching-chick: __[fetch data from APIs](./fetching-exercises)__ | | | | |
-| :hatching-chick: __[using BasicModel](./using-BasicModel.html)__ | | | | |
+| :hatching_chick: __[fetch data from APIs](./fetching-exercises)__ | | | | |
+| :hatching_chick: __[using BasicModel](./using-BasicModel.html)__ | | | | |
 
 ___
 ___

@@ -4,8 +4,8 @@
 | --- | --- | --- | --- | --- |
 | :egg: __[debug: basic crud](./debug-basic-crud)__ | | | | |
 | :egg: __[promise practice](./promise-practice.md)__ | | | | |
-| :hatching-chick: __[debug: API fetches](./debug-api-fetches)__ | | | | |
-| :hatched-chick: __[implement SearchableModel](./searchable-model)__ | | | | |
+| :hatching_chick: __[debug: API fetches](./debug-api-fetches)__ | | | | |
+| :hatched_chick: __[implement SearchableModel](./searchable-model)__ | | | | |
 
 ___
 ___

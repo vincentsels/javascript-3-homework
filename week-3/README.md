@@ -3,9 +3,9 @@
 | :mortar_board: | your emoji | your comments | coach emoji | coach comments |
 | --- | --- | --- | --- | --- |
 | :egg: __[DOM components](./dom-components)__ | | | | |
-| :hatching-chick: __[Pokemanager App](./pokemanager-app.md)__ | | | | |
-| :hatched-chick: __[SchemaModel extension](./schema-protected-model)__ | | | | |
-| :hatched-chick: __[TDD](./tdd)__ | | | | |
+| :hatching_chick: __[Pokemanager App](./pokemanager-app.md)__ | | | | |
+| :hatched_chick: __[SchemaModel extension](./schema-protected-model)__ | | | | |
+| :hatched_chick: __[TDD](./tdd)__ | | | | |
 
 ___
 ___
