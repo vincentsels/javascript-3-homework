@@ -1,4 +1,4 @@
-function render_new_bio_handler() {
+function preview_new_bio_handler() {
 
   // --- read user input ---
 
@@ -12,7 +12,7 @@ function render_new_bio_handler() {
 
   // --- perform core logic and data manipulations ---
 
-  // (there is none, we are using input as-is to render components)
+  // (there is none, we are using input as-is to preview components)
 
 
   // --- write results for the user ---
@@ -28,6 +28,6 @@ function render_new_bio_handler() {
 
 };
 
-var render_new_bio_button = document.getElementById("render-new-bio-button");
-render_new_bio_button.addEventListener("click", render_new_bio_handler);
+var preview_new_bio_button = document.getElementById("preview-new-bio-button");
+preview_new_bio_button.addEventListener("click", preview_new_bio_handler);
 

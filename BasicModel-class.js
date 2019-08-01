@@ -54,24 +54,24 @@ class BasicModel {
 
   create(new_entry) { 
     if (!BasicModel.isAnObject(new_entry)) {
-      throw new Error("CANNOT CREATE "+this._name+": entry is not an object - "+ new_entry);
+      throw new TypeError("CANNOT CREATE "+this._name+": entry is not an object - "+ new_entry);
     }
 
     const current_id = this._nextID;
     this._nextID++;
 
     const copy_to_save = JSON.parse(JSON.stringify(new_entry));
-    copy_to_save.id = current_id;
+    copy_to_save._id = current_id;
     this._DB[current_id] = copy_to_save;
     const copy_to_return = JSON.parse(JSON.stringify(copy_to_save));
     return copy_to_return;
   }
   read(id) { 
     if (!BasicModel.isValidId(id)) {
-      throw new Error("CANNOT READ "+this._name+": id must be a number - "+ id);
+      throw new TypeError("CANNOT READ "+this._name+": id must be a number - "+ id);
     }
     if (!BasicModel.entryExists(id, this._DB)) {
-      throw new Error("CANNOT READ "+this._name+": no entry with id - "+ id);
+      throw new ReferenceError("CANNOT READ "+this._name+": no entry with id - "+ id);
     }
 
     const entry_by_id = this._DB[id];
@@ -80,29 +80,29 @@ class BasicModel {
   }
   update(id, new_entry) { 
     if (!BasicModel.isValidId(id)) {
-      throw new Error("CANNOT UPDATE "+this._name+": id must be a number - "+ id);
+      throw new TypeError("CANNOT UPDATE "+this._name+": id must be a number - "+ id);
     }
     if (!BasicModel.entryExists(id, this._DB)) {
-      throw new Error("CANNOT UPDATE "+this._name+": no entry with id - "+ id);
+      throw new ReferenceError("CANNOT UPDATE "+this._name+": no entry with id - "+ id);
     }
     if (!BasicModel.isAnObject(new_entry)) {
-      throw new Error("CANNOT UPDATE "+this._name+": entry is not an object - "+ new_entry);
+      throw new TypeError("CANNOT UPDATE "+this._name+": entry is not an object - "+ new_entry);
     }
 
     const old_entry = this._DB[id];
 
     const new_copy = JSON.parse(JSON.stringify(new_entry));
-    new_copy.id = id;
+    new_copy._id = id;
     this._DB[id] = new_copy;
     
     return old_entry;
   }
   remove(id) { 
     if (!BasicModel.isValidId(id)) {
-      throw new Error("CANNOT DELETE "+this._name+": id must be a number - "+ id);
+      throw new TypeError("CANNOT DELETE "+this._name+": id must be a number - "+ id);
     }
     if (!BasicModel.entryExists(id, this._DB)) {
-      throw new Error("CANNOT DELETE "+this._name+": no entry with id - "+ id);
+      throw new ReferenceError("CANNOT DELETE "+this._name+": no entry with id - "+ id);
     };
 
     const deleted_item = this._DB[id];

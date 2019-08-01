@@ -5,86 +5,92 @@
   <meta charset="utf-8">
 
   <script src="../../BasicModel-class.js"></script>
-  <script src="./SearchableModel-extension.js"></script>
+  <script src="./SearchableModel-to-complete.js"></script>
   <script>
 
     // practice using it! write some scripts to pass these asserts
     console.log("--- using your SearchableModel ---")
-    try {
 
-      ; // write this line
-      console.assert(items.name === "items", "practice 1");
+    ; // write this line
+    console.assert(items.name === "items", "practice 1");
 
-      ; // write this line
-      console.assert(items.read(0).title === "first", "practice 2");
+    ; // write this line
+    console.assert(items.read(0).title === "first", "practice 2");
 
-      ; // write this line
-      console.assert(items.read(1).title === "first", "practice 3");   
+    ; // write this line
+    console.assert(items.read(1).title === "first", "practice 3");   
 
-      ; // write this line
-      console.assert(items.read(2).title === "fourth", "practice 4"); 
-
-
-
-      ; // use a search method!
-      let actual = JSON.stringify(one);
-      console.assert(actual === '{"title":"fourth","id":2}', "practice 5");
-
-      ; // use a different search method!
-      actual = JSON.stringify(two);
-      console.assert(actual === '[{"title":"fourth","id":2}]', "practice 6");
-
-      ; // use a different search method!
-      actual = JSON.stringify(three);
-      console.assert(actual === '[{"title":"fourth","id":2}]', "practice 7");
-
-      ; // use a different search method!
-      let actual = JSON.stringify(four);
-      console.assert(actual === '{"title":"fourth","id":2}', "practice 8");
+    ; // write this line
+    console.assert(items.read(2).title === "fourth", "practice 4"); 
 
 
 
-      ; // use a search method!
-      let actual = JSON.stringify(five);
-      console.assert(actual === '{"title":"first","id":0}', "practice 9a");
-      console.assert(actual !== '{"title":"first","id":1}', "practice 9b");
+    ; // use a search method!
+    let expected = {title:"fourth",id:2};
+    const p5 = SearchableModel.entriesMatch(expected, one);
+    console.assert(p5, "practice 5");
 
-      ; // use a different search method!
-      actual = JSON.stringify(six);
-      let expected = '[{"title":"first","id":0},{"title":"first","id":1}]';
-      console.assert(actual === expected, "practice 10");
+    ; // use a different search method!
+    expected = [{title:"fourth",id:2}];
+    const p6 = SearchableModel.entriesMatch(expected, two);
+    console.assert(p6, "practice 6");
 
-      ; // use a different search method!
-      actual = JSON.stringify(seven);
-      let expected = '[{"title":"first","id":0},{"title":"first","id":1}]';
-      console.assert(actual === expected, "practice 11");
+    ; // use a different search method!
+    expected = [{title:"fourth",id:2}];
+    const p7 = SearchableModel.entriesMatch(expected, three);
+    console.assert(p7, "practice 7");
 
-      ; // use a different search method!
-      let actual = JSON.stringify(eight);
-      console.assert(actual === '{"title":"first","id":2}', "practice 12a");
-      console.assert(actual !== '{"title":"first","id":1}', "practice 12b");
-
-
-
-      ; // use a search method
-      console.assert(nine === null, "practice 13");
-
-      ; // use a different search method!
-      console.assert(ten === null, "practice 14");
-
-      ; // use a different search method!
-      console.assert(eleven === null, "practice 15");
-
-      ; // reuse a search method!
-      console.assert(ten === null, "practice 16");
-
-      ; // reuse a different search method!
-      console.assert(eleven === null, "practice 17");
+    ; // use a different search method!
+    expected = {title:"fourth",id:2};
+    const p8 = SearchableModel.entriesMatch(expected, four);
+    console.assert(p8, "practice 8");
 
 
-    } catch(err) {
-      console.error(err);
-    }
+
+    ; // use a search method!
+    expected = {title:"first",id:0};
+    let they_match = SearchableModel.entriesMatch(expected, five);
+    console.assert(they_match, "practice 9a");
+
+    let unexpected = {title:"first",id:1};
+    let they_dont_match = !SearchableModel.entriesMatch(unexpected, five);
+    console.assert(they_dont_match, "practice 9b");
+
+    ; // use a different search method!
+    expected = [{title:"first",id:0},{title:"first",id:1}];
+    console.assert(SearchableModel.entriesMatch(expected, six), "practice 10");
+
+    ; // use a different search method!
+    expected = [{title:"first",id:0},{title:"first",id:1}];
+    console.assert(SearchableModel.entriesMatch(expected, seven), "practice 11");
+
+    ; // use a different search method!
+    expected = {title:"first",id:2};
+    they_match = SearchableModel.entriesMatch(expected, eight);
+    console.assert(they_match, "practice 12a");
+
+    unexpected = {title:"first",id:1};
+    they_dont_match = !SearchableModel.entriesMatch(unexpected, eight);
+    console.assert(they_dont_match, "practice 12b");
+
+
+
+    ; // use a search method
+    console.assert(nine === null, "practice 13");
+
+    ; // use a different search method!
+    console.assert(ten === null, "practice 14");
+
+    ; // use a different search method!
+    console.assert(eleven === null, "practice 15");
+
+    ; // reuse a search method!
+    console.assert(ten === null, "practice 16");
+
+    ; // reuse a different search method!
+    console.assert(eleven === null, "practice 17");
+
+
 
     // --- !! challenge !! ---
 

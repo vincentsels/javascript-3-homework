@@ -16,7 +16,7 @@
     fish.create(first_fish);
     const first_fish_entry = fish.read(0);
     console.assert(first_fish_entry.fast === true, "first fish isn't fast");
-    console.assert(first_fish_entry.id === 0, "first fish isn't the first fish");
+    console.assert(first_fish_entry._id === 0, "first fish isn't the first fish");
 
     first_fish.endangered = true;
     fish.update(0, first_fish);
@@ -35,7 +35,7 @@
     fish.create(second_fish);
     const second_fish_entry = fish.read(1);
     console.assert(second_fish_entry.species === "minnow", "second fish isn't a minnow");
-    console.assert(second_fish_entry.id === 1, "second fish isn't the second fish");
+    console.assert(second_fish_entry._id === 1, "second fish isn't the second fish");
 
     fish.create({fast: false, species: "fillet", endangered: true});
     console.log("all fish")
@@ -58,14 +58,14 @@
     birds.create(second_bird);
     const second_bird_entry = {}; // fix this line
     console.assert(second_bird_entry.can_fly === true, "second bird can fly");
-    console.assert(second_bird_entry.id === 1, "second bird isn't the second bird (1)");
+    console.assert(second_bird_entry._id === 1, "second bird isn't the second bird (1)");
 
     second_bird.color = null;  // fix this line
     birds.update(1, second_bird);
     const updated_bird_entry = {}; // fix this line
     console.assert(updated_bird_entry.color === "orange", "second bird is no longer purple");
     console.assert(updated_bird_entry.can_fly === true, "second bird devolved");
-    console.assert(second_bird_entry.id === 1, "second bird isn't the second bird (2)");
+    console.assert(second_bird_entry._id === 1, "second bird isn't the second bird (2)");
 
     birds.remove(3); // fix this line
     try {
@@ -79,7 +79,7 @@
     const third_bird_entry = birds.read(/* the newest entry's id*/);
     console.assert(third_bird_entry.species === "pigeon", "third bird isn't a pigeon");
     // fix the next assert
-    console.assert(third_bird_entry.id === null, "third bird isn't the third bird");
+    console.assert(third_bird_entry._id === null, "third bird isn't the third bird");
 
     console.log("active bird ids", birds.activeIds);
 

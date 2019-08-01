@@ -1,1 +1,1 @@
-write a table for this
+try to write your own user story table for this project, like the one in [crud 1](../to-study-crud-1)

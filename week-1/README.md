@@ -1,10 +1,13 @@
-egg 
-  https://github.com/janke-learning/three-layer-handers
-    make a copy of this repo on your account, complete the empty handlers, include a link to your repo live on gh-pages
-  reference-type args
-  debug the things
-  using-BasicModel.html
+## Week 1 Homework
 
+| :mortar_board: | your emoji | your comments | coach emoji | coach comments |
+| --- | --- | --- | --- | --- |
+| :egg: __[three-layer handlers](./three-layer-handlers)__ | | | | |
+| :egg: __[reference type arguments](./reference-type-args.md)__ | | | | |
+| :egg: __[the Event Loop](./loupe-exercises.md)__ | | | | |
+| :hatching-chick: __[fetch data from APIs](./fetching-exercises)__ | | | | |
+| :hatching-chick: __[using BasicModel](./using-BasicModel.html)__ | | | | |
 
-https://github.com/HackYourFuture-CPH/JavaScript/blob/master/JavaScript3/Week8/homework.md
-
+___
+___
+### <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>

@@ -1,1 +1,0 @@
-https://github.com/HackYourFuture-CPH/JavaScript/blob/master/JavaScript3/Week8/homework.md#visual-promise
