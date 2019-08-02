@@ -1,0 +1,1 @@
+study this.  can you write a story-table for it?

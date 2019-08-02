@@ -1,0 +1,85 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+
+    <div>
+      <h2> Closure: Sharing State </h2>
+      <p>
+        "State" is the value of a variable at one moment in execution.  Two frames share state if they can use a variable and get the same values.  
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+ <!-- 
+  
+  finally break into mini-apps
+
+  -->
+
+    <div id="multiple-functions">
+      <h3>Closing Multiple Functions (to study)</h3>
+      <script id="multiple-functions-snip">
+{ 
+  function closer(parent_arg) {
+    const parent_local = "shared by all";
+    const closee_functions = [
+            function parg() {return parent_arg},
+            function pocal() {return parent_local},
+            function both() {return parent_arg+" "+parent_local}
+          ];
+    return closee_functions;
+  }
+
+  const closed_functions_1 = closer("these variables are");
+  closed_functions_1[0]();
+  closed_functions_1[1]();
+  closed_functions_1[2]();
+
+  const closed_functions_2 = closer("these values are");
+  closed_functions_2[0]();
+  closed_functions_2[1]();
+  closed_functions_2[2]();
+
+}
+      </script>
+      <button onclick="copy_code('multiple-functions-snip')">run in console</button>
+      <button onclick="open_in_pytut('multiple-functions-snip')">run & edit in pytut</button>
+    </div>
+
+    
+    <hr>  
+
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+
+
+  </body>
+
+</html>

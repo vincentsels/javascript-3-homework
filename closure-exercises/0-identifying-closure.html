@@ -1,0 +1,294 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+    <div>
+      <h2> Closure: Identifying Closures </h2>
+      <p>
+        A good first step for mastering closure is learning how to recognize it when you see it.  <br>
+        Internalizing <a href="https://janke-learning.github.io/parsonizer/?snippet=function%20does_create_a_closure%28func%2C%20arg%29%20%7B%0A%0A%20%20const%20arg_is_function%20%3D%20typeof%20arg%20%3D%3D%3D%20%22function%22%3B%0A%20%20const%20return_value%20%3D%20func%28arg%29%3B%0A%20%20const%20arg_is_returned%20%3D%20return_value%20%3D%3D%3D%20arg%3B%0A%0A%20%20let%20creates_a_closure%3B%0A%0A%20%20%2F%2F%20does%20it%20return%20a%20function%3F%0A%20%20if%20%28typeof%20return_value%20!%3D%3D%20%22function%22%29%20%7B%0A%20%20%20%20creates_a_closure%20%3D%20false%3B%0A%20%20%0A%20%20%2F%2F%20is%20it%20the%20same%20function%20that%20was%20passed%20in%3F%0A%20%20%7D%20else%20if%20%28arg_is_function%20%26%26%20arg_is_returned%29%20%7B%0A%20%20%20%20creates_a_closure%20%3D%20false%3B%0A%20%20%0A%20%20%2F%2F%20if%20neither%2C%20it%20creates%20a%20closure!%0A%20%20%7D%20else%20%7B%0A%20%20%20%20creates_a_closure%20%3D%20true%3B%0A%20%20%7D%0A%0A%20%20return%20creates_a_closure%3B%0A%7D" target="_blank">this function</a> will take you a long way down that path.
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+
+    <div id="functions-as-arguments">
+      <h3>functions as arguments (a prelude)</h3>
+      <script id="functions-as-arguments-snip">
+{ // --- a quick explanation of passing and returning functions
+
+  function arg_func(){};
+  
+  function returns_arg(x) { return x };
+  const returned_same = returns_arg(arg_func);
+  console.nativeAssert(arg_func === returned_same, "returned-1");
+
+  function returns_new_function(x) { return function() {}}
+  const returned_new = returns_new_function(arg_func);
+  console.nativeAssert(arg_func !== returned_new, "returned-2");
+
+} // --- a quick explanation of passing and returning functions
+      </script>
+      <button onclick="copy_code('functions-as-arguments-snip')">run in console</button>
+      <button onclick="open_in_pytut('functions-as-arguments-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-1">
+      <h3> exercise 1</h3>
+      <script id="snippet-1">
+{
+  // any function that returns a new function creates a closure
+  // returning a function that was passed as an argument doesn't count
+  // the returned function must be declared inside the function call (frame on pytut)
+
+  function does_create_a_closure(func, arg) {
+
+    const arg_is_function = typeof arg === "function";
+    const return_value = func(arg);
+    const arg_is_returned = return_value === arg;
+
+    let creates_a_closure;
+
+    // does it return a function?
+    if (typeof return_value !== "function") {
+      creates_a_closure = false;
+    
+    // is it the same function that was passed in?
+    } else if (arg_is_function && arg_is_returned) {
+      creates_a_closure = false;
+    
+    // if neither, it creates a closure!
+    } else {
+      creates_a_closure = true;
+    }
+
+    return creates_a_closure;
+  }
+
+  function a(x) {
+    return x;
+  }
+
+  const a_1 = does_create_a_closure(a, 4);
+  console.assert(a_1 === null, "exercise 1", "a");
+
+  const a_2 = does_create_a_closure(a, function(){});
+  console.assert(a_2 === null, "exercise 1", "b");
+
+  const a_3 = does_create_a_closure(a, []);
+  console.assert(a_3 === null, "exercise 1", "c");
+
+  const a_4 = does_create_a_closure(a, a);
+  console.assert(a_4 === null, "exercise 1", "d");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-1')">run in console</button>
+      <button onclick="open_in_pytut('snippet-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-2">
+      <h3> exercise 2</h3>
+      <script id="snippet-2">
+{
+  // any function that returns a new function creates a closure
+  // returning a function that was passed as an argument doesn't count
+  // the returned function must be declared inside the function call (frame on pytut)
+
+  function does_create_a_closure(func, arg) {
+
+    const arg_is_function = typeof arg === "function";
+    const return_value = func(arg);
+    const arg_is_returned = return_value === arg;
+
+    let creates_a_closure;
+
+    // does it return a function?
+    if (typeof return_value !== "function") {
+      creates_a_closure = false;
+    
+    // is it the same function that was passed in?
+    } else if (arg_is_function && arg_is_returned) {
+      creates_a_closure = false;
+    
+    // if neither, it creates a closure!
+    } else {
+      creates_a_closure = true;
+    }
+
+    return creates_a_closure;
+  }
+
+  function b(x) {
+    return function() {}
+  }
+
+  const b_1 = does_create_a_closure(b, 4);
+  console.assert(b_1 === null, "exercise 2", "a");
+
+  const b_2 = does_create_a_closure(b, function(){});
+  console.assert(b_1 === null, "exercise 2", "b");
+
+  const b_3 = does_create_a_closure(b, []);
+  console.assert(b_3 === null, "exercise 2", "c");
+
+  const b_4 = does_create_a_closure(b, b);
+  console.assert(b_4 === null, "exercise 2", "d");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-2')">run in console</button>
+      <button onclick="open_in_pytut('snippet-2')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-3">
+      <h3> exercise 3</h3>
+      <script id="snippet-3">
+{
+  // any function that returns a new function creates a closure
+  // returning a function that was passed as an argument doesn't count
+  // the returned function must be declared inside the function call (frame on pytut)
+
+  function does_create_a_closure(func, arg) {
+
+    const arg_is_function = typeof arg === "function";
+    const return_value = func(arg);
+    const arg_is_returned = return_value === arg;
+
+    let creates_a_closure;
+
+    // does it return a function?
+    if (typeof return_value !== "function") {
+      creates_a_closure = false;
+    
+    // is it the same function that was passed in?
+    } else if (arg_is_function && arg_is_returned) {
+      creates_a_closure = false;
+    
+    // if neither, it creates a closure!
+    } else {
+      creates_a_closure = true;
+    }
+
+    return creates_a_closure;
+  }
+
+  function c(x) {
+    if (typeof x === "function") {
+      return x;
+    } else {
+      return function() {}; 
+    }
+  }
+
+  const c_1 = does_create_a_closure(c, 4);
+  console.assert(c_1 === null, "exercise 3", "a");
+
+  const c_2 = does_create_a_closure(c, function(){});
+  console.assert(c_1 === null, "exercise 3", "b");
+
+  const c_3 = does_create_a_closure(c, []);
+  console.assert(c_3 === null, "exercise 3", "c");
+
+  const c_4 = does_create_a_closure(c, c);
+  console.assert(c_4 === null, "exercise 3", "d");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-3')">run in console</button>
+      <button onclick="open_in_pytut('snippet-3')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-4">
+      <h3> exercise 4</h3>
+      <script id="snippet-4">
+{
+  // any function that returns a new function creates a closure
+  // returning a function that was passed as an argument doesn't count
+  // the returned function must be declared inside the function call (frame on pytut)
+
+  function does_create_a_closure(func, arg) {
+
+    const arg_is_function = typeof arg === "function";
+    const return_value = func(arg);
+    const arg_is_returned = return_value === arg;
+
+    let creates_a_closure;
+
+    // does it return a function?
+    if (typeof return_value !== "function") {
+      creates_a_closure = false;
+    
+    // is it the same function that was passed in?
+    } else if (arg_is_function && arg_is_returned) {
+      creates_a_closure = false;
+    
+    // if neither, it creates a closure!
+    } else {
+      creates_a_closure = true;
+    }
+
+    return creates_a_closure;
+  }
+
+  function d(x) {
+    if (typeof x !== "function") {
+      return x;
+    } else {
+      return function() {}; 
+    }
+  }
+
+  const d_1 = does_create_a_closure(d, 4);
+  console.assert(d_1 === null, "exercise 4", "a");
+
+  const d_2 = does_create_a_closure(d, function(){});
+  console.assert(d_1 === null, "exercise 4", "b");
+
+  const d_3 = does_create_a_closure(d, []);
+  console.assert(d_3 === null, "exercise 4", "c");
+
+  const d_4 = does_create_a_closure(d, c);
+  console.assert(d_4 === null, "exercise 4", "d");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-4')">run in console</button>
+      <button onclick="open_in_pytut('snippet-')">run & edit in pytut</button>
+    </div>
+
+<hr>  
+<hr>  
+<a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+  </body>
+
+</html>

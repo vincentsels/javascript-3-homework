@@ -1,0 +1,140 @@
+
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+
+    <div>
+      <h2> Closure: Free Variables </h2>
+      <p>
+        "Free variables are simply the variables that are neither locally declared nor passed as parameter." (credit to <a href="https://stackoverflow.com/questions/12934929/what-are-free-variables" target="_blank">Denys Séguret</a>)
+        <br><br>
+        This sounds like an abstract, mathy definition. But really it's not so bad.  You can even identify free variables just by reading code, without even running it!
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="undefined-free-var">
+      <h3>Undefined Free Variable</h3>
+      <script id="undefined-free-var-snip">
+{ // undefined free variable
+
+  function free_or_not(arg) {
+    const local_const = "declared in function";
+    let local_let = "declared in function";
+    var local_var = "declared in function";
+    free_variable = "not local or an argument";
+  }
+
+  free_or_not("1 - declared at function call");
+  free_or_not("2 - declared at function call");
+
+}
+      </script>
+      <button onclick="copy_code('undefined-free-var-snip')">run in console</button>
+      <button onclick="open_in_pytut('undefined-free-var-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="global-free-var">
+      <h3>Globally Defined Free Variable</h3>
+      <script id="global-free-var-snip">
+{ // free variable with value from global scope
+  function free_or_not(arg) {
+    var local_var = "declared in function";
+    free_variable_global = "global side-effect";
+  }
+
+  let free_variable_global = "declared in global scope";
+  free_or_not("1 - declared at function call");
+  free_or_not("2 - declared at function call"); 
+
+  free_variable_global = "reassigned in global scope";
+  free_or_not("3 - declared at function call"); 
+
+}
+      </script>
+      <button onclick="copy_code('global-free-var-snip')">run in console</button>
+      <button onclick="open_in_pytut('global-free-var-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="closed-free-var">
+      <h3>Closure Defined Free Variable</h3>
+      <script id="closed-free-var-snip">
+{ // free variable with value from closure
+
+  function closer() {
+    let free_variable_closed = "declared in parent frame";
+    return function free_or_not_closed(arg) {
+              var local_var = "declared in function";
+              free_variable_closed = "closed side-effect";
+            }
+  }  
+
+  const closed_1 = closer();
+  closed_1("1a - declared at function call");
+
+  const closed_2 = closer();
+  closed_2("2a - declared at function call"); 
+  closed_2("2b - declared at function call"); 
+
+  closed_1("1b - declared at function call"); 
+
+}
+      </script>
+      <button onclick="copy_code('closed-free-var-snip')">run in console</button>
+      <button onclick="open_in_pytut('closed-free-var-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>  
+
+    <div id="exercise-1">
+      <h3>exercise 1</h3>
+      <script id="snippet-1">
+{
+  
+
+}
+      </script>
+      <button onclick="copy_code('snippet-1')">run in console</button>
+      <button onclick="open_in_pytut('snippet-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+
+
+  </body>
+
+</html>

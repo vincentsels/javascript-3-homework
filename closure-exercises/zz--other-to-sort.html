@@ -1,0 +1,86 @@
+
+    <div id="exercise-1">
+      <h3> exercise 1</h3>
+      <script id="solution-1">
+{ 
+  // replace all the "null"s to pass the asserts
+  // or follow the instructions in the comments
+
+  function close_a_value(val) {
+    return function() {
+      return val;
+    }
+  }
+
+  const one = close_a_value(1);
+  const one_returns = one();
+  console.assert(one_returns === null, "exercise 1", "a:", one_returns);
+
+  const two = close_a_value(2);
+  const two_returns = two();
+  console.assert(two_returns === null, "exercise 1", "b:", two_returns);
+
+  const three = null;
+  const three_returns = null;
+  console.assert(three_returns === 4, "exercise 1", "c:", three_returns);
+
+  const sum = one + two + three; // fix this line to pass the assert
+  console.assert(sum === 7, "exercise 1", "d");
+
+}
+      </script>
+      <button onclick="copy_code('solution-1')">run in console</button>
+      <button onclick="open_in_pytut('solution-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-3">
+      <h3> exercise 3</h3>
+      <script id="solution-3">
+{ 
+  // replace "null" in asserts with the correct value
+  
+  function by_scope() {
+    return x;
+  }
+
+  function close_it(x) {
+    return function closed() {
+      return x;
+    }
+  }
+
+  let x = 0;
+  const scoped_1 = by_scope();
+  console.assert(scoped_1 === null, "exercise 3", "a");
+
+  const by_closure_1 = close_it(x);
+  const closed_1 = by_closure_1();
+  console.assert(closed_1 === null, "exercise 3", "b");
+
+  x = 1;
+  const scoped_2 = by_scope();
+  console.assert(scoped_2 === null, "exercise 3", "c");
+
+  const closed_2 = by_closure_1();
+  console.assert(closed_2 === null, "exercise 3", "d");
+
+  x = 2
+  const scoped_3 = by_scope();
+  console.assert(scoped_3 === null, "exercise 3", "e");
+
+  const by_closure_2 = close_it(x);
+  const closed_3 = by_closure_2();
+  console.assert(closed_3 === null, "exercise 3", "f");
+  const closed_4 = by_closure_1();
+  console.assert(closed_4 === null, "exercise 3", "g");
+
+}
+      </script>
+      <button onclick="copy_code('solution-3')">run in console</button>
+      <button onclick="open_in_pytut('solution-3')">run & edit in pytut</button>
+    </div>
+    
+    <hr>
