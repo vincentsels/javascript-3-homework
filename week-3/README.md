@@ -4,7 +4,7 @@
 | --- | --- | --- | --- | --- |
 | :egg: __[event loop: 5 & 6](../exercises-event-loop)__ | | | | |
 | :egg: __[DOM components](./dom-components)__ | | | | |
-| :hatching_chick: __[Pokemanager App](./pokemanager-app.md)__ | | | | |
+| :hatching_chick: __[Pokemanager App](./pokemanager-app)__ | | | | |
 | :hatching_chick: __[closure: 4 & 5](../closure-exercises)__ | | | | |
 | :hatched_chick: __[SchemaModel extension](./schema-protected-model)__ | | | | |
 | :hatched_chick: __[TDD](./tdd)__ | | | | |
