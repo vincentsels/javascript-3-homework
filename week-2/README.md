@@ -5,8 +5,7 @@
 | :egg: __[debug: basic crud](./debug-basic-crud)__ | | | | |
 | :egg: __[event loop: 3 & 4](../exercises-event-loop)__ | | | | |
 | :hatching_chick: __[debug: API fetches](./debug-api-fetches)__ | | | | |
-| :hatching_chick: __[closure: 2 & 3](../closure-exercises)__ | | | | |
-| :hatching_chick: __[the event loop](../exercises-event-loop)__ | | | | |
+| :hatching_chick: __[closure: 2 & 3](../exercises-closure)__ | | | | |
 | :hatched_chick: __[implement SearchableModel](./searchable-model)__ | | | | |
 
 ___
