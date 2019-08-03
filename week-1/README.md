@@ -9,7 +9,6 @@
 | :egg: __[three-layer handlers](./three-layer-handlers)__ | | | | |
 | :hatching_chick: __[fetch data from APIs](./fetching-exercises)__ | | | | |
 | :hatching_chick: __[using BasicModel](./using-BasicModel.html)__ | | | | |
-| :hatching_chick: __[closure: the rest](./closure)__ | | | | |
 
 ---
 
