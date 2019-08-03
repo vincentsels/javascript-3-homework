@@ -1,6 +1,6 @@
 console.nativeAssert = console.assert;
 
-console.assert = function(assertion, exercise, step, value) {
+console.assert = function(assertion, exercise) {
 
                     // this bit isn't so bad to understand
                     //   it makes sure the exercise div is red if even one assert has failed

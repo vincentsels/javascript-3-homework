@@ -1,0 +1,61 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="run-tests.js"></script>
+
+  </head>
+
+  <body>
+    <div>
+      <h2> Closure: A Small Project </h2>
+      <p>
+        Coming Soon!  in the mean time, play around this this model factory.  it's lots of fun
+      </p>
+    </div>
+
+    <script> 
+      function model_factory(_name) {
+
+        function create_person(_id, _name, _surname) {
+          const new_entry = {
+            id: () => _id,
+            name: val => ( (val === undefined) ? _name : _name = val ),
+            surname: val => ( (val === undefined) ? _surname : _surname = val ),
+          }
+          Object.freeze(new_entry)
+          return new_entry;
+        }
+
+        const _db = {};
+        let next_id = 0;
+
+        const new_model = {
+          name: () => _name,
+          add: (name, surname) => (
+                    _db[next_id] = create_person(next_id++, name, surname)
+                  ),
+          entry: id => _db[id],
+          remove: id => {
+                    const removed = _db[id];
+                    delete _db[id];
+                    return removed;
+                  },
+          all: () => Object.values(_db)
+        }
+        Object.freeze(new_model);
+        return new_model;
+      }
+
+    </script>
+
+
+<hr>  
+<hr>  
+<a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+  </body>
+
+</html>

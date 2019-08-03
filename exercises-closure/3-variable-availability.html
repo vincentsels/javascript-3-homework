@@ -1,0 +1,436 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+
+    <div>
+      <h2> Closure: Variable Availability </h2>
+      <p>
+        To master and use closure you need to be aware of which frames are open when, what variables have which values, and which frames can access which variables
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="global-parent-own">
+      <h3>Global, Parent, Own (to study)</h3>
+      <script id="global-parent-own-snip">
+{ 
+  let global_var = "shared between all frames"
+
+  function close_it(parent_arg) {
+    var parent_local = "shared between closure_"+parent_arg+" calls";
+    return function closee(own_arg) {
+              var own_local = "declared in own body - not shared";
+              parent_arg = "availabe next closure call";
+              parent_local = "also available next closure call";
+            }
+  }
+
+  
+  const closure_1 = close_it(1);
+  
+  const closure_2 = close_it(2);
+
+  closure_2("not available anywhere else");
+  closure_1("disappears forever with this frame");
+
+  closure_2("declared at own call - 2");
+  closure_1("hi mom!");
+
+}
+      </script>
+      <button onclick="copy_code('global-parent-own-snip')">run in console</button>
+      <button onclick="open_in_pytut('global-parent-own-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="availabilities">
+      <h3>Variable Availabilities (to study)</h3>
+      <script id="availabilities-snip">
+{ 
+  let global_var = "available to all frames ever";
+
+  function close_it(parent_arg, id) {
+    var all_parent_variables = "available to all closure_"+id+" frames";
+    var parent_reading_global = global_var;
+    return function(own_arg) {
+              var own_local = "disappears with this frame";
+              var own_reading_global = global_var;
+              all_parent_variables;
+              parent_reading_global;
+            }
+  }
+
+  global_var = "1 - reassigned before closure_1 is made";
+  const closure_1 = close_it("first closure created", 1);
+
+  global_var = "2 - reassigned before closure_2 is made";
+  const closure_2 = close_it("second closure created", 2);
+
+  global_var = "charles";
+  closure_1("--= disappears with this frame");
+
+  global_var = "av------er";
+  closure_2("--33##33-");
+
+  global_var = "availames ever";
+  closure_1("--= asd =--");
+
+  global_var = "avas ever";
+  closure_2("---");
+}
+      </script>
+      <button onclick="copy_code('availabilities-snip')">run in console</button>
+      <button onclick="open_in_pytut('availabilities-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-1">
+      <h3>exercise 1</h3>
+      <script id="exercise-1-snip">
+{ 
+  function close_it(parent_arg) {
+    return function(own_arg) {
+            return global_var+" "+parent_arg+" "+own_arg;
+          }
+  }
+
+  ; // write this
+  ; // write this
+  ; // write this
+  console.assert(result_1 === "x y z", "exercise 1", "a");
+
+  global_var = "4";
+  const closed_2 = close_it("7");
+  const result_2 = closed_2("1");
+  conosle.assert(result_2 === null, "exercise 1", "b");
+
+  const result_3 = closed_2("0");
+  conosle.assert(result_3 === null, "exercise 1", "c");
+
+  ; // write as many lines as necessary
+  console.assert(result_4 === "z y x", "exercise 1", "d");
+}
+      </script>
+      <button onclick="copy_code('exercise-1-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-1-snip')">run & edit in pytut</button>
+    </div>
+
+    
+    <hr>  
+
+    <div id="exercise-2">
+      <h3>exercise 2</h3>
+      <script id="exercise-2-snip">
+{ 
+
+  function no_free_vars(arg) {
+    return arg;
+  }
+
+  function reads_global(arg) {
+    return arg + global_var;
+  }
+
+  function close_it(parent_arg) {
+    return function reads_parent(own_arg) {
+      return own_arg + parent_arg;
+    }
+  }
+
+  const result_0 = no_free_vars(/*  */);
+  console.assert(result_0 === "ee", "exercise 2", "a")
+
+  ; // write as many lines as you need
+  const result_1 = reads_global("e");
+  console.assert(result_1 === "ee", "exercise 2", "b");
+
+  ; // write as many lines as you need
+  const result_2 = closure_1("e");
+  console.assert(result_2 === "ee", "exercise 2", "c");
+
+  ; // write as many lines as you need
+  const result_3 = closure_1(reads_global(/* */));
+  console.assert(result_3 === result_1, "exercise 2", "d");
+
+  ; // write as many lines as you need
+  const result_4 = closure_2(reads_global(/* */));
+  console.assert(result_4 === result_1, "exercise 2", "e");
+
+  ; // write as many lines as you need
+  const result_5 = reads_global(closure_3(/* */));
+  console.assert(result_5 === "this is really hard", "exercise 2", "f");
+}
+      </script>
+      <button onclick="copy_code('exercise-2-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-2-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-3">
+      <h3>exercise 3</h3>
+      <script id="exercise-3-snip">
+{
+  let global_var = "first value";
+
+  function x(global_var) {
+    global_var = "new value";
+    return global_var;
+  }
+  const result_1 = x(global_var);
+  console.assert(global_var === null, "exercise 3", "a");
+  console.assert(result_1 === null, "exercise 3", "b");
+
+  
+  function y() {
+    let parent_local = "humpty";
+    return function(parent_local) {
+      parent_local += " dumpty";
+      return parent_local;
+    }
+  }
+  const closure_1 = y();
+
+  const result_2 = closure_1("plantain");
+  console.assert(result_2 === null, "exercise 3", "c");
+
+  const result_3 = closure_1("plantain");
+  console.assert(result_3 === null, "exercise 3", "d");
+
+  function z() {
+    let global_var = "humpty";
+    return function(own_arg) {
+      global_var += own_arg;
+      return global_var;
+    }
+  }
+  const closure_2 = z();
+
+  const result_4 = closure_2("mindy");
+  console.assert(result_4 === null, "exercise 3", "e");
+  console.assert(global_var === null, "exercise 3", "f");
+
+  const result_5 = closure_2("ydnim");
+  console.assert(result_5 === null, "exercise 3", "g");
+  console.assert(global_var === null, "exercise 3", "h");
+
+
+
+}
+      </script>
+      <button onclick="copy_code('exercise-3-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-3-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-4">
+      <h3>exercise 4</h3>
+      <script id="exercise-4-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+    function b() {
+      arg;
+    }
+    b();
+
+  } catch(err) {
+    console.assert(false, "exercise 4", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-4-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-4-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-5">
+      <h3>exercise 5</h3>
+      <script id="exercise-5-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+    function closure() {
+      parent_arg;
+    }
+    const c_2 = c_1(3);
+    c_2();
+
+  } catch(err) {
+    console.assert(false, "exercise 5", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-5-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-5-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-6">
+      <h3>exercise 6</h3>
+      <script id="exercise-6-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+    function d() {
+      arg; global_2; parent_arg;
+    }
+    d();
+
+  } catch(err) {
+    console.assert(false, "exercise 6", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-6-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-6-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-7">
+      <h3>exercise 7</h3>
+      <script id="exercise-7-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+    function e() {
+      global_3; parent_arg;
+    }
+    const e_2 = e();
+    e_2();
+
+  } catch(err) {
+    console.assert(false, "exercise 7", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-7-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-7-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-8">
+      <h3>exercise 8</h3>
+      <script id="exercise-8-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+    function f() {
+      own_arg;
+      return function(own_arg) {
+        parent_local; parent_arg;
+      }
+    }
+    const f_2 = f();
+    f_2();
+
+  } catch(err) {
+    console.assert(false, "exercise 8", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-8-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-8-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-9">
+      <h3>exercise 9</h3>
+      <script id="exercise-9-snip">
+{
+  // fix the error, in a way that matches the variable names
+  try {
+
+    function g() {
+      own_arg;
+      return function(own_arg) {
+        parent_local; parent_arg;
+      }
+    }
+    const g_2 = g();
+    g_2();
+
+  } catch(err) {
+    console.assert(false, "exercise 9", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-9-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-9-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-10">
+      <h3>exercise 10</h3>
+      <script id="exercise-10-snip">
+{
+  // fix the error, paying attention to the variable names
+  try {
+    function h() {
+      global_1;
+    }
+    h();
+
+  } catch(err) {
+    console.assert(false, "exercise 10", err);
+
+  }
+}
+      </script>
+      <button onclick="copy_code('exercise-10-snip')">run in console</button>
+      <button onclick="open_in_pytut('exercise-10-snip')">run & edit in pytut</button>
+    </div>
+
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+
+
+  </body>
+
+</html>

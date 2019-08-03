@@ -1,0 +1,292 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+
+    <div>
+      <h2> Closure: Sharing State </h2>
+      <p>
+        "State" is the value of a variable when it is accessed.  Two frames share state if they have shared access to the same value. When two frames share state changes, that means if one frame changes a variable's value, that new value is available to the other frame. 
+        <br>
+        Sharing state is the beating heart of any application. Imagine if every time you tweeted the database started from empty!  How you store state in your applications, and how you do (or don't!) allow different pieces of your code to modify that state is one of the core features of a well-designed or a poorly-designed project. 
+        <br>
+        Below you'll see 3 ways that functions can share state between frames:
+        <ol>
+          <li>
+            <strong>Arguments and Return Values:</strong>  state can be shared between frames by passing values in  as arguments and capturing return values in global variables.  this is generally the simplest method to reason about and to debug as the same arguments will always return the same value not matter what. ("pure functions"). once you understand the individual functions, you can understand the whole program. To make things even easier, using global const variables will leave a record of each step of your computation - ideal for debugging & reusing old values
+          </li>
+          <li>
+            <strong>Global Free Variables:</strong> state changes can shared between frames by directly modifying a globally defined free variable from inside the function, changes to state will be available to all frames ever. This is called "Global Side Effects" and it's a dirty word in the JavaScript world.  Using this method is one of the quickest ways to make mistakes and write code that's very difficult to debug.  these are not "pure functions" because the same arguments do not always make the same return value
+          </li>
+          <li>
+            <strong>Closed Free Variables:</strong> state changes can shared more carefully between frames by modifying a closed free variable. This strategy is somewhere between the two above.  changes made are not available globally, but do show up the next time you call the same function.  while closures that modify closed variables are not "pure functions", they are often a good way to build your programs.  
+          </li>
+        </ol>
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="by-arg-ret">
+      <h3>Sharing State by Args & Return</h3>
+      <script id="by-arg-ret-snip">
+{
+  const str_0 = "";
+
+  function concat_pigs(str) {
+    return str + " pigs";
+  }
+  function concat_arg(str, arg) {
+    return str + " " + arg;
+  }
+
+  const str_1 = concat_pigs(str_0);
+
+  const str_2 = concat_arg(str_1, " rock!");
+
+  const str_3 = concat_pigs(str_2);
+
+  const str_4 = concat_arg(str_2, str_3);
+}
+      </script>
+      <button onclick="copy_code('by-arg-ret-snip')">run in console</button>
+      <button onclick="open_in_pytut('by-arg-ret-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="by-global-free">
+      <h3>Sharing State by Global Free Variable</h3>
+      <script id="by-global-free-snip">
+{
+  let str = "";
+
+  function concat_pigs() {
+    str += " pigs";
+  }
+  function concat_arg(arg) {
+    str += " " + arg;
+  }
+
+  concat_pigs();
+
+  concat_arg(" rock!");
+
+  concat_pigs();
+
+  concat_arg(str);
+}
+      </script>
+      <button onclick="copy_code('by-global-free-snip')">run in console</button>
+      <button onclick="open_in_pytut('by-global-free-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="by-closed-free">
+      <h3>Sharing State by Closed Free Variable</h3>
+      <script id="by-closed-free-snip">
+{
+
+  function close_it(str, parent_id) {
+    return [
+              function concat_pigs() { parent_id; str += " pigs" },
+              function concat_arg(arg) { parent_id; str += arg },
+              function return_str() { parent_id; return str }
+           ]
+  }
+
+  let closures_1 = close_it("", 1);
+  const pigs_1 = closures_1[0], arg_1 = closures_1[1], str_1 = closures_1[2];
+  closures_1 = null;
+
+  str_1();
+  pigs_1();
+  arg_1(" rock!");
+  pigs_1();
+  arg_1(str_1());
+  str_1();
+
+  let closures_2 = close_it("rick", 2);
+  const pigs_2 = closures_2[0], arg_2 = closures_2[1], str_2 = closures_2[2];
+  closures_2 = null;
+
+  str_2();
+  pigs_2();
+  arg_2(" stink :(");
+  pigs_2();
+  arg_2(str_2());
+  
+  const final_1 = str_1();
+  const final_2 = str_2();
+}
+      </script>
+      <button onclick="copy_code('by-closed-free-snip')">run in console</button>
+      <button onclick="open_in_pytut('by-closed-free-snip')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="exercise-1">
+      <h3>exercise 1: calc by arg/return</h3>
+      <script id="snippet-1">
+{
+  // replace "null" in the asserts or follow other instructions
+  const result_0 = 0;
+
+  function add(a, b) {
+    return a + b;
+  }
+  function subract(a, b) {
+    return a + b;
+  }
+
+  const result_1 = add(result_0, 3);
+  console.assert(result_1 === null, "exercise 1", "a");
+
+  const result_2 = add(result_1, null);
+  console.assert(result_2 === -1, "exercise 1", "b");
+
+  ; // write this line
+  console.assert(result_3 === 10, "exercise 1", "c");  
+
+  ; // write this line
+  console.assert(result_4 !== result_4, "exercise 1", "d");  
+
+  const result_5 = add(result_0, 3);
+  console.assert(result_5 === null, "exercise 1", "e");
+}
+      </script>
+      <button onclick="copy_code('snippet-1')">run in console</button>
+      <button onclick="open_in_pytut('snippet-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-2">
+      <h3>exercise 2: calc by global free variable</h3>
+      <script id="snippet-2">
+{ 
+  // replace "null" in the asserts or follow other instructions
+  let last_result = 0;
+
+  function add(a) {
+    last_result += a;
+    return last_result;
+  }
+  function subract(a) {
+    last_result -= a;
+    return last_result;
+  }
+
+  add(3); // call either add or subtract
+  console.assert(last_result === null, "exercise 2", "a");
+
+  ; // call either add or subtract
+  console.assert(last_result === -1, "exercise 2", "b");
+
+  ; // call either add or subtract
+  console.assert(last_result === 10, "exercise 2", "c");  
+
+  ; // call either add or subtract
+  console.assert(last_result !== last_result, "exercise 2", "d");  
+
+  add(3); // call either add or subtract
+  console.assert(last_result !== null, "exercise 2", "e");
+}
+      </script>
+      <button onclick="copy_code('snippet-2')">run in console</button>
+      <button onclick="open_in_pytut('snippet-2')">run & edit in pytut</button>
+    </div>
+
+
+    <hr>
+
+
+    <div id="exercise-3">
+      <h3>exercise 3: calc by closed free variable</h3>
+      <script id="snippet-3">
+{
+  function calc_close_it() {
+    let result = 0;
+    return [
+      a => { result += a },
+      a => { result -= a },
+      () => result,
+    ]
+  }
+
+  let closures_1 = calc_close_it();
+  const add_1 = closures_1[0], sub_1 = closures_1[1], result_1 = closures_1[2];
+  closures_1 = null;
+
+  add_1(4); 
+  console.assert(result_1() === null, "exercise 3", "a");
+
+  ; // call either add_1 or sub_1
+  console.assert(result_1() === -1, "exercise 3", "b");
+
+  ; // call either add_1 or sub_1
+  console.assert(result_1() === 5, "exercise 3", "c");  
+
+  let closures_2 = calc_close_it();
+  const add_2 = closures_2[0], sub_2 = closures_2[1], result_2 = closures_2[2];
+  closures_2 = null;
+
+  add_2(4); 
+  console.assert(result_2() === null, "exercise 3", "d");
+
+  ; // call either add_2 or sub_2
+  console.assert(result_2() === 8, "exercise 3", "e");
+
+  ; // call either add_2 or sub_2
+  console.assert(result_2() === NaN, "exercise 3", "f"); 
+
+  console.assert(result_1() === null, "exercise 3", "g"); 
+
+  add_1(4); 
+  console.assert(result_1() === null, "exercise 3", "h");
+  add_2(4); 
+  console.assert(result_2() === null, "exercise 3", "i");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-3')">run in console</button>
+      <button onclick="open_in_pytut('snippet-3')">run & edit in pytut</button>
+    </div>
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+
+
+  </body>
+
+</html>

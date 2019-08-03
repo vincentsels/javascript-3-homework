@@ -2,12 +2,13 @@
 
 | :mortar_board: | your emoji | your comments | coach emoji | coach comments |
 | --- | --- | --- | --- | --- |
+| :egg: __[event loop: 5 & 6](../exercises-event-loop)__ | | | | |
 | :egg: __[DOM components](./dom-components)__ | | | | |
-| :egg: __[event loop: n](../event-loop-exercises)__ | | | | |
 | :hatching_chick: __[Pokemanager App](./pokemanager-app.md)__ | | | | |
 | :hatching_chick: __[closure: 4 & 5](../closure-exercises)__ | | | | |
 | :hatched_chick: __[SchemaModel extension](./schema-protected-model)__ | | | | |
 | :hatched_chick: __[TDD](./tdd)__ | | | | |
+| :hatched_chick: __[event loop: 7 & 8](../exercises-event-loop)__ | | | | |
 
 ___
 ___

@@ -1,0 +1,161 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+
+    <div>
+      <h2> Closure: Data Structures </h2>
+      <p>
+        Put what you've learned to the test! These are three reverse-engineering (basically TDD) exercises to get you thinking about how you might use closures in your next project to protect and manage application data.
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="exercise-1">
+      <h3>exercise 1</h3>
+      <script id="snippet-1">
+{
+  function close_array() {
+    // write this!
+  }
+
+  // the asserts all work, modifying them will make this harder
+  const closed_array = close_array([]);
+  const push = closed_array[0];
+  const pop = closed_array[1];
+  const unshift = closed_array[2];
+  const shift = closed_array[3];
+  const length = closed_array[4];
+  const item_at = closed_array[5];
+
+  console.assert(push("a") === undefined, "exercise 1", "a");
+  console.assert(push("b") === undefined, "exercise 1", "b");
+  console.assert(push("c") === undefined, "exercise 1", "c");
+
+  console.assert(pop() === "c", "exercise 1", "d");
+  console.assert(pop() === "b", "exercise 1", "e");
+
+  console.assert(unshift("x") === undefined, "exercise 1", "f");
+  console.assert(unshift("y") === undefined, "exercise 1", "g");
+
+  console.assert(shift() === "y", "exercise 1", "h");
+  console.assert(shift() === "x", "exercise 1", "i");
+
+  console.assert(length() === 1, "exercise 1", "j");
+
+  console.assert(item_at(0) === "a", "exercise 1", "k");
+
+}
+      </script>
+      <button onclick="copy_code('snippet-1')">run in console</button>
+      <button onclick="open_in_pytut('snippet-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-2">
+      <h3>exercise 2</h3>
+      <script id="snippet-2">
+{
+  // write a close_object function that will pass all of these asserts
+  function close_object() {
+    // write this!
+  }
+
+
+  // the asserts all work, modifying them will make this harder
+  const closed_obj = close_object({});
+
+  console.assert(typeof closed_obj.size === "function", "exercise 2", "a");
+  console.assert(typeof closed_obj.keys === "function", "exercise 2", "b");
+  console.assert(typeof closed_obj.get === "function", "exercise 2", "c");
+  console.assert(typeof closed_obj.set === "function", "exercise 2", "d");
+  console.assert(typeof closed_obj.remove === "function", "exercise 2", "e");
+
+  console.assert(closed_obj.size() === 0, "exercise 2", "f");
+  console.assert(closed_obj.set("a", 4) === 4, "exercise 2", "g");
+  console.assert(closed_obj.size() === 1, "exercise 2", "h");
+  console.assert(closed_obj.get("a") === 4, "exercise 2", "i");
+
+  console.assert(closed_obj.set("x", null) === null, "exercise 2", "j");
+  console.assert(closed_obj.keys()[0] === "a", "exercise 2", "k");
+  console.assert(closed_obj.keys()[1] === "x", "exercise 2", "l");
+  console.assert(closed_obj.size() === 2, "exercise 2", "m");
+
+  console.assert(closed_obj.remove("a") === true, "exercise 2", "n");  
+  console.assert(closed_obj.size() === 1, "exercise 2", "o");  
+  console.assert(closed_obj.get("a") === undefined, "exercise 2", "p");  
+  console.assert(closed_obj.keys()[0] === "x", "exercise 2", "q");  
+}
+      </script>
+      <button onclick="copy_code('snippet-2')">run in console</button>
+      <button onclick="open_in_pytut('snippet-2')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-3">
+      <h3>exercise 3</h3>
+      <script id="snippet-3">
+{
+  // write a closure_object function that will pass all of these asserts
+  function functional_object(_permanent, _changeable) {
+    /* 
+      write this function body
+    */
+  }
+
+  // the asserts all work, modifying them will make this harder
+  const obj = functional_object("fixed", "not fixed");
+  
+  console.assert(delete obj.first === false, "exercise 3", "a");
+  console.assert(delete obj.second === false, "exercise 3", "b");
+  
+  console.assert(typeof obj.first === "function", "exercise 3", "c");
+  console.assert(typeof obj.second === "function", "exercise 3", "d");
+
+  console.assert(obj.first() === "fixed", "exercise 3", "e");
+  console.assert(obj.first("(-o-)") === "fixed", "exercise 3", "f");
+  console.assert(obj.first() === "fixed", "exercise 3", "g");
+
+  console.assert(obj.second() === "not fixed", "exercise 3", "h");
+  console.assert(obj.second("(-o-)") === "(-o-)", "exercise 3", "i");
+  console.assert(obj.second() === "(-o-)", "exercise 3", "j");
+}
+      </script>
+      <button onclick="copy_code('snippet-3')">run in console</button>
+      <button onclick="open_in_pytut('snippet-3')">run & edit in pytut</button>
+    </div>
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+
+
+  </body>
+
+</html>

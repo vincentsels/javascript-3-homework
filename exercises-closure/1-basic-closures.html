@@ -1,0 +1,218 @@
+<!doctype html>
+
+  <html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <script src="open-in-pytut.js"></script>
+    <script src="copy-snippet.js"></script>
+    <script src="console-assert.js"></script>
+
+  </head>
+
+  <body>
+    <div>
+      <h2> Closure: Basic Closures </h2>
+      <p>
+        Closures can get tricky pretty quickly if you want to use them for something practical. A little practice with the basic closure use-case will help you get ready for the coming exercises.  <br>
+        Play around with these two examples before moving on, it'll help: 
+        <ul>
+          <li>  
+            <a href="http://www.pythontutor.com/live.html#code=function%20close_it%28parent_arg%29%20%7B%0A%20%20let%20parent_local%20%3D%20%22declared%20in%20parent%20body%22%3B%0A%20%20return%20function%20%28own_arg%29%20%7B%0A%20%20%20%20let%20own_local%20%3D%20%22declared%20in%20own%20body%22%3B%0A%20%20%20%20return%20%5Bparent_arg,%20parent_local,%20own_arg,%20own_local%5D%3B%0A%20%20%7D%0A%7D%0Aconst%20closure_1%20%3D%20close_it%28%221%20-%20declared%20in%20parent%20call%22%29%3B%0Aconst%20result_1a%20%3D%20closure_1%28%22a%20-%20declared%20in%20own%20call%22%29%3B%0A%0Aconst%20closure_2%20%3D%20close_it%28%222%20-%20declared%20in%20parent%20call%22%29%3B%0Aconst%20result_2b%20%3D%20closure_2%28%22b%20-%20declared%20in%20own%20call%22%29%3B%0A%0Aconst%20result_1c%20%3D%20closure_1%28%22c%20-%20declared%20in%20own%20call%22%29%3B%0Aconst%20result_2d%20%3D%20closure_2%28%22d%20-%20declared%20in%20own%20call%22%29%3B&cumulative=false&curInstr=0&heapPrimitives=nevernest&mode=display&origin=opt-live.js&py=js&rawInputLstJSON=%5B%5D&textReferences=false" target="_blank">a pytut closure</a> 
+          </li>
+          <li>
+            <a href="https://janke-learning.github.io/parsonizer/?snippet=function%20close_it%28parent_arg%29%20%7B%0A%20%20let%20parent_local%20%3D%20%22declared%20in%20parent%20body%22%3B%0A%20%20return%20function%20%28own_arg%29%20%7B%0A%20%20%20%20let%20own_local%20%3D%20%22declared%20in%20own%20body%22%3B%0A%20%20%20%20return%20%5Bparent_arg%2C%20parent_local%2C%20own_arg%2C%20own_local%5D%3B%0A%20%20%7D%0A%7D%0Aconst%20closure%20%3D%20close_it%28%22declared%20in%20parent%20call%22%29%3B%0Aconst%20result%20%3D%20closure%28%22declared%20in%20own%20call%22%29%3B" target="_blank">a parsonized closure</a>
+          </li> 
+        </ul>
+      </p>
+    </div>
+    <div>
+      the smoothest workflow for these exercises will either be either:
+      <ul>
+        <li>
+          edit this file in your text editor and check your solutions in the browser
+        </li>
+        <li>
+          write your solutions <a href="http://www.pythontutor.com/live.html#" target="_blank">in pytut</a> and paste them into your html
+        </li>
+      </ul>
+    </div>
+
+    <hr>
+    <hr>
+
+    <div id="exercise-1">
+      <h3>exercise 1</h3>
+      <script id="solution-1">
+{ 
+  // replace all the "null"s to pass the asserts
+  // or follow the instructions in the comments
+
+  function close_a_value(val) {
+    return function() {
+      return val;
+    }
+  }
+
+  const one = close_a_value(1);
+  const one_returns = one();
+  console.assert(one_returns === null, "exercise 1", "a:", one_returns);
+
+  const two = close_a_value(2);
+  const two_returns = two();
+  console.assert(two_returns === null, "exercise 1", "b:", two_returns);
+
+  const three = null;
+  const three_returns = null;
+  console.assert(three_returns === 4, "exercise 1", "c:", three_returns);
+
+  const sum = one + two + three; // fix this line to pass the assert
+  console.assert(sum === 7, "exercise 1", "d");
+
+  ; // use one, two and three to pass this assert
+  console.assert(product === 16, "exercise 1", "e");
+
+}
+      </script>
+      <button onclick="copy_code('solution-1')">run in console</button>
+      <button onclick="open_in_pytut('solution-1')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-2">
+      <h3>exercise 2</h3>
+      <script id="solution-2">
+{
+  // replace "null"s with values to pass the asserts
+  // or follow other instructions in the comments
+
+  function close_it(parent_arg) {
+    return function closure(own_arg) {
+            return own_arg + parent_arg;
+          }
+  }
+
+  const closure_1 = close_it(3);
+  const closure_2 = close_it("3");
+
+  const result_1a = closure_1(8);
+  const result_1b = closure_2(8);
+  console.assert(result_1a === null, "exercise 2", "a:", result_1a)
+  console.assert(result_1b === null, "exercise 2", "b:", result_1b)
+
+  const result_2c = closure_1(true);
+  const result_2d = closure_2(true);
+  console.assert(result_2c === null, "exercise 2", "c:", result_2c)
+  console.assert(result_2d === null, "exercise 2", "d:", result_2d)
+
+  ; // write this line using a call to closure_1
+  ; // write this line using a call to closure_2
+  console.assert(result_3e === result3f, "exercise 2", "e");
+}
+      </script>
+      <button onclick="copy_code('solution-2')">run in console</button>
+      <button onclick="open_in_pytut('solution-2')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+
+    <div id="exercise-3">
+      <h3>exercise 3</h3>
+      <script id="solution-3">
+{
+  // replace "null"s with values to pass the asserts
+  // or follow other instructions in the comments
+  function close_it(a) {
+    const b = "b";
+    return function closure(c) {
+      const d = "d";
+      return a + b + c + d;
+    }
+  }
+
+  const closure_1 = close_it("a");
+
+  const result_1 = closure_1("c");
+  console.assert(result_1 === null, "exercise 3", "a", result_1);
+
+  const result_2 = closure_1("x");
+  console.assert(result_2 === null, "exercise 3", "b", result_2);
+
+
+  const closure_2 = close_it("iii");
+
+  const result_3 = closure_2("2");
+  console.assert(result_3 === null, "exercise 3", "c", result_3);
+
+  const result_4 = closure_2("--");
+  console.assert(result_4 === null, "exercise 3", "d", result_4);
+
+
+  const result_5 = closure_1(8);
+  console.assert(result_5 === null, "exercise 3", "e");  
+
+  ; // write this line with a call to closure_2
+  console.assert(result_6 === "iiib d", "exercise 3", "f");
+}
+      </script>
+      <button onclick="copy_code('solution-3')">run in console</button>
+      <button onclick="open_in_pytut('solution-3')">run & edit in pytut</button>
+    </div>
+
+    <hr>
+
+    <div id="exercise-4">
+      <h3>exercise 4</h3>
+      <script id="solution-4">
+{
+  // replace "null"s with values to pass the asserts
+  // or follow other instructions in the comments
+
+  function close_it(x, y) {
+    return function closure(x) {
+      return x + y;
+    }
+  }
+
+  const closure_4_5 = close_it(4, 5);
+
+  const result_1 = closure_4_5(200);
+  console.assert(result_1 === null, "exercise 4", "a:", result_1);
+
+  const result_2 = closure_4_5(-3);
+  console.assert(result_1 === null, "exercise 4", "b:", result_2);
+
+
+  const closure_false_true = close_it(false, true);
+
+  const result_3 = closure_false_true(200);
+  console.assert(result_3 === null, "exercise 4", "c:", result_3);
+
+  const result_4 = closure_false_true(-3);
+  console.assert(result_4 === null, "exercise 4", "d:", result_4);  
+
+
+  const result_5 = closure_4_5(1);
+  console.assert(result_5 === null, "exercise 4", "e");
+
+  ; // write this line using both closures and "+""
+  console.assert(result_6 === 6, "exercise 5", "f");
+}
+      </script>
+      <button onclick="copy_code('solution-4')">run in console</button>
+      <button onclick="open_in_pytut('solution-4')">run & edit in pytut</button>
+    </div>
+
+
+
+
+
+    <hr>  
+    <hr>  
+    <a href="https://hackyourfuture.be" target="_blank"><img src="https://pbs.twimg.com/profile_images/984474625009741824/Bs_qKx6-_400x400.jpg" width="100" height="100"></img></a>
+
+  </body>
+
+</html>
