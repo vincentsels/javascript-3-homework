@@ -2,7 +2,7 @@
 
 First things first.  Don't Panic!
 
-This homework repo is huge but most of it is code for you to study, not exercises to complete.  As you finish the assignments for each week don't forget to snoop around all the folders.  For each large assignment there is at least 1 similar example for you to study!
+This homework repo is huge but most of it is code for you to study, not exercises to complete.  As you're working on the assignments each week don't forget to snoop around all the folders.  There is almost always at least 1 similar example for you to study!
 
 You can find your assignment for each week in the week folders:
 1. [week 1 homework](./week-1)
