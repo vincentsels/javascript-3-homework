@@ -211,7 +211,7 @@
   console.assert(c_1 === null, "exercise 3", "a");
 
   const c_2 = does_create_a_closure(c, function(){});
-  console.assert(c_1 === null, "exercise 3", "b");
+  console.assert(c_2 === null, "exercise 3", "b");
 
   const c_3 = does_create_a_closure(c, []);
   console.assert(c_3 === null, "exercise 3", "c");
@@ -271,12 +271,12 @@
   console.assert(d_1 === null, "exercise 4", "a");
 
   const d_2 = does_create_a_closure(d, function(){});
-  console.assert(d_1 === null, "exercise 4", "b");
+  console.assert(d_2 === null, "exercise 4", "b");
 
   const d_3 = does_create_a_closure(d, []);
   console.assert(d_3 === null, "exercise 4", "c");
 
-  const d_4 = does_create_a_closure(d, c);
+  const d_4 = does_create_a_closure(d, d);
   console.assert(d_4 === null, "exercise 4", "d");
 
 }
