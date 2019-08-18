@@ -1,0 +1,15 @@
+body > * {
+    margin-bottom: 10px;
+}
+
+#country-flag > img {
+    max-width: 300px;
+}
+
+#select-countries {
+    display: none;
+}
+
+#loading {
+    display: none;
+}
