@@ -8,16 +8,11 @@ const titleDiv = document.getElementById('country-title');
 const infoDiv = document.getElementById('country-info');
 const loadingSpan = document.getElementById('loading');
 
-const ALL_COUNTRIES_ENDPOINT = 'https://restcountries.eu/rest/v2/all';
+const countryRepository = new CountryRepository();
 
-let countries = [];
-
-function populateSelectList() {
+function populateSelectList(countries) {
   countries.forEach((country) => {
-    const option = document.createElement('option');
-    option.text = country.name;
-    option.value = country.name;
-
+    const option = country.renderAsOption();
     countriesSelectList.appendChild(option);
   });
   loadCountriesButton.setAttribute('disabled', '');
@@ -30,11 +25,9 @@ function showLoading(loading) {
 
 function getCountries() {
   showLoading(true);
-  fetch(ALL_COUNTRIES_ENDPOINT)
-    .then((result) => result.json())
-    .then((data) => {
-      countries = data;
-      populateSelectList();
+  countryRepository.loadAllCountries()
+    .then((countries) => {
+      populateSelectList(countries);
       showLoading(false);
     })
     .catch((error) => {
@@ -47,22 +40,14 @@ function getCountries() {
 
 function selectCountry() {
   const selectedCountryName = countriesSelectList.value;
-  const country = countries.find((c) => c.name === selectedCountryName);
+  const country = countryRepository.getCountryByName(selectedCountryName);
 
   flagDiv.innerHTML = '';
   titleDiv.innerHTML = '';
-
-  const img = document.createElement('img');
-  img.src = country.flag;
-  flagDiv.appendChild(img);
-
-  // Translate the bordering countries' codes into their actual names
-  const borderingCountries = country.borders.map(
-    (borderCode) => countries.find(
-      (c) => c.alpha3Code === borderCode).name).join(', ');
-
-  titleDiv.innerHTML = country.name;
-  infoDiv.innerHTML = `Its bordering countries are ${borderingCountries}.`;
+  
+  flagDiv.innerHTML = country.renderFlag();
+  titleDiv.innerHTML = country.renderName();
+  infoDiv.innerHTML = country.renderInfo(countryRepository.countries);
 
   countryCardDiv.style.display = 'block';
 }
