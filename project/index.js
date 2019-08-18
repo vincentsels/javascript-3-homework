@@ -8,6 +8,8 @@ const titleDiv = document.getElementById('country-title');
 const infoDiv = document.getElementById('country-info');
 const loadingSpan = document.getElementById('loading');
 
+const ALL_COUNTRIES_ENDPOINT = 'https://restcountries.eu/rest/v2/all';
+
 let countries = [];
 
 function populateSelectList() {
@@ -28,7 +30,7 @@ function showLoading(loading) {
 
 function getCountries() {
   showLoading(true);
-  fetch('https://restcountries.eu/rest/v2/all')
+  fetch(ALL_COUNTRIES_ENDPOINT)
     .then((result) => result.json())
     .then((data) => {
       countries = data;
@@ -54,10 +56,13 @@ function selectCountry() {
   img.src = country.flag;
   flagDiv.appendChild(img);
 
-  const borderingCountries = country.borders.map((borderCode) => countries.find((c) => c.alpha3Code === borderCode).name).join(', ');
+  // Translate the bordering countries' codes into their actual names
+  const borderingCountries = country.borders.map(
+    (borderCode) => countries.find(
+      (c) => c.alpha3Code === borderCode).name).join(', ');
 
   titleDiv.innerHTML = country.name;
-  infoDiv.innerHTML = `Its bordering countries are ${borderingCountries}`;
+  infoDiv.innerHTML = `Its bordering countries are ${borderingCountries}.`;
 
   countryCardDiv.style.display = 'block';
 }
