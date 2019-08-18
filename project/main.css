@@ -3,13 +3,19 @@ body > * {
 }
 
 #country-flag > img {
-    max-width: 300px;
+    max-width: 100%;
 }
 
 #select-countries {
     display: none;
+    max-width: 300px;
 }
 
 #loading {
     display: none;
+}
+
+#country-card {
+    display: none;
+    width: 300px;
 }

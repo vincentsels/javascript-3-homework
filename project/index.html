@@ -1,22 +1,28 @@
 <html>
-    <head>
-        <title>Week 2 homework</title>
-        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="main.css">
-    </head>
-    <body>
-        <div>
-            <button id="btn-load-countries" type="button" class="btn btn-primary">Load countries</button>
-        </div>
-
-        <select id="select-countries"><option>Select a country....</option></select> <span id="loading">Loading...</span>
-        
-        <div id="country-card" class="card">
-            <div id="country-flag"></div>
-            <div id="country-info"></div>
-        </div>
-
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="index.js"></script>
-    </body>
+<head>
+	<title>Week 2 homework</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="main.css">
+</head>
+<body>
+	<div class="container">
+		<h1 class="mt-3">Week 2 project <small>- Country Info</small></h1>
+		<div class="mt-3">
+			<button id="btn-load-countries" type="button" class="btn btn-primary">Load countries</button>
+		</div>
+		
+		<select id="select-countries" class="mt-3"><option>Select a country....</option></select> <span id="loading">Loading...</span>
+		
+		<div id="country-card" class="card mt-3">
+			<div id="country-flag"></div>
+			<div class="card-body">
+				<h5 class="card-title" id="country-title"></h5>
+				<p class="card-text" id="country-info"></p>
+			</div>
+		</div>
+	</div>
+	
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="index.js"></script>
+</body>
 </html>
