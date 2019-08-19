@@ -66,12 +66,12 @@ function selectCountry() {
     borderCode => countries.find(c => c.alpha3Code === borderCode).name).join(', ');
 
   const borderingCountriesText = borderingCountries
-  ? `Its bordering countries are ${borderingCountries}.`
-  : 'It has no bordering countries.';
+    ? `Its bordering countries are ${borderingCountries}.`
+    : 'It has no bordering countries.';
   
   const capitalText = country.capital
-  ? `Its capital is ${country.capital}.`
-  : 'It has no capital.';
+    ? `Its capital is ${country.capital}.`
+    : 'It has no capital.';
   
   titleDiv.innerHTML = country.name;
   infoDiv.innerHTML =  `${capitalText} ${borderingCountriesText}`;
