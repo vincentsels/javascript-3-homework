@@ -18,7 +18,7 @@ function populateSelectList() {
     const option = document.createElement('option');
     option.text = country.name;
     option.value = country.name;
-
+    
     countriesSelectList.appendChild(option);
   });
   loadCountriesButton.setAttribute('disabled', '');
@@ -56,31 +56,32 @@ function getCountries() {
 function selectCountry() {
   const selectedCountryName = countriesSelectList.value;
   const country = countries.find((c) => c.name === selectedCountryName);
-
+  
   flagDiv.innerHTML = '';
   titleDiv.innerHTML = '';
-
+  
   const img = document.createElement('img');
   img.src = country.flag;
   flagDiv.appendChild(img);
-
+  
   // Translate the bordering countries' codes into their actual names
   const borderingCountries = country.borders.map(
-    (borderCode) => countries.find(
-      (c) => c.alpha3Code === borderCode).name).join(', ');
+    borderCode => countries.find(c => c.alpha3Code === borderCode).name).join(', ');
+
   const borderingCountriesText = borderingCountries
-    ? `Its bordering countries are ${borderingCountries}.`
-    : 'It has no bordering countries.';
-
+  ? `Its bordering countries are ${borderingCountries}.`
+  : 'It has no bordering countries.';
+  
   const capitalText = country.capital
-    ? `Its capital is ${country.capital}.`
-    : 'It has no capital.';
-
+  ? `Its capital is ${country.capital}.`
+  : 'It has no capital.';
+  
   titleDiv.innerHTML = country.name;
   infoDiv.innerHTML =  `${capitalText} ${borderingCountriesText}`;
-
+  
   countryCardDiv.style.display = 'block';
 }
-
+  
 loadCountriesButton.onclick = () => getCountries();
 countriesSelectList.onchange = () => selectCountry();
+    
