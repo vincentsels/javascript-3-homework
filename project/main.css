@@ -1,22 +1,22 @@
 #country-flag > img {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 #select-countries {
-    display: none;
-    max-width: 300px;
+	display: none;
+	max-width: 300px;
 }
 
 #loading {
-    display: none;
+	display: none;
 }
 
 #error-dialog {
-    margin-top: 10px;
-    display: none;
+	margin-top: 10px;
+	display: none;
 }
 
 #country-card {
-    display: none;
-    width: 300px;
+	display: none;
+	width: 300px;
 }
