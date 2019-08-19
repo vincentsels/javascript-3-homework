@@ -7,6 +7,7 @@ const flagDiv = document.getElementById('country-flag');
 const titleDiv = document.getElementById('country-title');
 const infoDiv = document.getElementById('country-info');
 const loadingSpan = document.getElementById('loading');
+const errorDialog = document.getElementById('error-dialog');
 
 const ALL_COUNTRIES_ENDPOINT = 'https://restcountries.eu/rest/v2/all';
 
@@ -28,8 +29,14 @@ function showLoading(loading) {
   loadingSpan.style.display = loading ? 'inline' : 'none';
 }
 
+function showError(errorDetail) {
+  errorDialog.style.display = errorDetail ? 'block': 'none';
+  errorDialog.innerText = 'An error occurred: ' + errorDetail;
+}
+
 function getCountries() {
   showLoading(true);
+  showError(null);
   fetch(ALL_COUNTRIES_ENDPOINT)
     .then((result) => result.json())
     .then((data) => {
@@ -38,6 +45,7 @@ function getCountries() {
       showLoading(false);
     })
     .catch((error) => {
+      showError(error);
       // handle error
       // eslint-disable-next-line no-console
       console.error(`Error trying to get countries: ${error}`);
@@ -60,9 +68,16 @@ function selectCountry() {
   const borderingCountries = country.borders.map(
     (borderCode) => countries.find(
       (c) => c.alpha3Code === borderCode).name).join(', ');
+  const borderingCountriesText = borderingCountries
+    ? `Its bordering countries are ${borderingCountries}.`
+    : 'It has no bordering countries.';
+
+  const capitalText = country.capital
+    ? `Its capital is ${country.capital}.`
+    : 'It has no capital.';
 
   titleDiv.innerHTML = country.name;
-  infoDiv.innerHTML = `Its bordering countries are ${borderingCountries}.`;
+  infoDiv.innerHTML =  `${capitalText} ${borderingCountriesText}`;
 
   countryCardDiv.style.display = 'block';
 }
