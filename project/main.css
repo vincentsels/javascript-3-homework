@@ -1,3 +1,7 @@
+.container > * {
+  margin-bottom: 10px;
+}
+
 #country-flag > img {
   max-width: 100%;
 }
@@ -12,7 +16,6 @@
 }
 
 #error-dialog {
-  margin-top: 10px;
   display: none;
 }
 
