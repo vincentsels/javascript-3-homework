@@ -14,6 +14,18 @@ const SELECT_COUNTRY_TEXT = 'Select a country...';
 
 let countries = [];
 
+function disableElement(element, disable = true) {
+  element.disabled = disable;
+}
+
+function showElement(element, show = true) {
+  element.hidden = !show;
+}
+
+function clearElement(element) {
+  element.innerHTML = '';
+}
+
 function addOptionToCountrySelectList(text) {
   const option = document.createElement('option');
   option.text = text;
@@ -25,23 +37,23 @@ function populateSelectList() {
   addOptionToCountrySelectList(SELECT_COUNTRY_TEXT);
 
   countries.forEach(country => addOptionToCountrySelectList(country.name));
-  
-  loadCountriesButton.setAttribute('disabled', '');
-  countriesSelectList.style.display = 'inline';
+
+  disableElement(loadCountriesButton)
+  showElement(countriesSelectList);
 }
 
 function showLoadingIndicator(loading) {
-  loadingSpan.style.display = loading ? 'inline' : 'none';
+  showElement(loadingSpan, loading);
 }
 
-function showError(errorDetail) {
-  errorDialog.style.display = errorDetail ? 'block': 'none';
+function setError(errorDetail) {
+  showElement(errorDialog, errorDetail);
   errorDialog.innerText = 'An error occurred: ' + errorDetail;
 }
 
 function getCountries() {
   showLoadingIndicator(true);
-  showError(null);
+  setError(null);
 
   fetch(ALL_COUNTRIES_ENDPOINT)
     .then((result) => result.json())
@@ -50,7 +62,7 @@ function getCountries() {
       populateSelectList();
     })
     .catch((error) => {
-      showError(error);
+      setError(error);
     })
     .finally(() => showLoadingIndicator(false));
 }
@@ -60,7 +72,7 @@ function setCountryName(country) {
 }
 
 function setCountryFlag(country) {
-  flagDiv.innerHTML = '';
+  clearElement(flagDiv);
   
   const img = document.createElement('img');
   img.src = country.flag;
@@ -85,7 +97,7 @@ function setCountryInfo(country) {
 
 function selectCountry() {
   if (countriesSelectList.value === SELECT_COUNTRY_TEXT) {
-    countryCardDiv.style.display = 'none';
+    showElement(countryCardDiv, false);
     return;
   }
 
@@ -96,7 +108,7 @@ function selectCountry() {
   setCountryName(country);
   setCountryInfo(country);
   
-  countryCardDiv.style.display = 'block';
+  showElement(countryCardDiv);
 }
   
 loadCountriesButton.onclick = getCountries;

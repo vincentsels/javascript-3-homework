@@ -7,19 +7,9 @@
 }
 
 #select-countries {
-  display: none;
   max-width: 300px;
 }
 
-#loading {
-  display: none;
-}
-
-#error-dialog {
-  display: none;
-}
-
 #country-card {
-  display: none;
   width: 300px;
 }
