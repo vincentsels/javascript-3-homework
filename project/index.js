@@ -38,7 +38,7 @@ function populateSelectList() {
 
   countries.forEach(country => addOptionToCountrySelectList(country.name));
 
-  disableElement(loadCountriesButton)
+  disableElement(loadCountriesButton);
   showElement(countriesSelectList);
 }
 
@@ -82,7 +82,8 @@ function setCountryFlag(country) {
 function setCountryInfo(country) {
   // Translate the bordering countries' codes into their actual names
   const borderingCountries = country.borders.map(
-    borderCode => countries.find(c => c.alpha3Code === borderCode).name).join(', ');
+    borderCode => countries.find(c => c.alpha3Code === borderCode).name
+  ).join(', ');
 
   const borderingCountriesText = borderingCountries
     ? `Its bordering countries are ${borderingCountries}.`
