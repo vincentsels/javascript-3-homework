@@ -79,6 +79,6 @@ function selectCountry() {
   countryCardDiv.style.display = 'block';
 }
   
-loadCountriesButton.onclick = () => getCountries();
-countriesSelectList.onchange = () => selectCountry();
+loadCountriesButton.onclick = getCountries;
+countriesSelectList.onchange = selectCountry;
     
