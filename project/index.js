@@ -46,9 +46,6 @@ function getCountries() {
     })
     .catch((error) => {
       showError(error);
-      // handle error
-      // eslint-disable-next-line no-console
-      console.error(`Error trying to get countries: ${error}`);
       showLoading(false);
     });
 }
